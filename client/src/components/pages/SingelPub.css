@@ -1,0 +1,14 @@
+div .form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 2% 0% 0% 14%;
+}
+.singelPub{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.singelIm{
+    width: 300px;
+}

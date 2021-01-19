@@ -1,0 +1,242 @@
+body {
+  display: flex;
+  justify-content: center;
+  margin: 0% 0% 7% 0%;
+  color: #3f52bf !important ;
+  font: 600 16px/18px "Open Sans", sans-serif;
+}
+
+.total{
+  margin-left: 333px;
+}
+.adding-box {
+  width: 100%;
+  margin: auto;
+  max-width: 525px;
+  min-height: 938px;
+  position: relative;
+  background: url(https://image.freepik.com/photos-gratuite/cabane-brune-foret_249578-1721.jpg);
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.adding-snip {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 20px 70px 50px 70px;
+}
+
+.adding-form {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  
+  backface-visibility: hidden;
+  transition: all 0.4s linear;
+}
+
+.adding-snip .sign-in,
+.adding-snip .sign-up,
+.adding-space .group .check {
+  display: none;
+}
+
+.adding-snip .tab {
+  font-size: 22px;
+  margin-right: 15px;
+  margin-top: 30px;
+  padding-bottom: 5px;
+  margin: 26px 15px 33px 0;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+}
+
+.adding-snip .sign-in:checked + .tab,
+.adding-snip .sign-up:checked + .tab {
+  color:rgb(247, 80, 3);
+  border-color: #1161ee;
+}
+
+.adding-space {
+  min-height: 345px;
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.adding-space .group {
+  margin-bottom: 15px;
+}
+
+.adding-space .group .label,
+.adding-space .group .input,
+.adding-space .group .button {
+  width: 100%;
+  color: rgb(255, 255, 255);
+  display: block;
+}
+
+div .group .input,
+.group .button {
+  border: none;
+  padding: 15px 20px;
+  border-radius: 25px;
+  background: rgba(14, 13, 13, 0.349);
+}
+
+.button{
+  margin-top: 20px;
+}
+.adding-space .group .label {
+  color: rgb(247, 80, 3);
+  font-size: 15px;
+  margin-top: 20px;
+}
+
+.adding-space .group .button {
+  background:rgb(247, 80, 3);
+  margin-top: 9%;
+}
+
+.adding-space .group select {
+  background: blueviolet;
+  color: white;
+  border-radius: 8%;
+  margin-left: 5%;
+}
+
+.adding-space .group label .icon {
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  position: relative;
+  display: inline-block;
+  background: rgba(190, 10, 10, 0.1);
+}
+
+.adding-space .group label .icon:before,
+.adding-space .group label .icon:after {
+  content: "";
+  width: 10px;
+  height: 2px;
+  background: #fff;
+  position: absolute;
+  transition: all 0.2s ease-in-out 0s;
+}
+
+.adding-space .group label .icon:before {
+  left: 3px;
+  width: 5px;
+  bottom: 6px;
+  transform: scale(0) rotate(0);
+}
+
+.adding-space .group label .icon:after {
+  top: 6px;
+  right: 0;
+  transform: scale(0) rotate(0);
+}
+
+.adding-space .group .check:checked + label {
+  color: #fff;
+}
+
+.adding-space .group .check:checked + label .icon {
+  background: #1161ee;
+}
+
+.adding-space .group .check:checked + label .icon:before {
+  transform: scale(1) rotate(45deg);
+}
+
+.adding-space .group .check:checked + label .icon:after {
+  transform: scale(1) rotate(-45deg);
+}
+
+.adding-snip .sign-in:checked + .tab + .sign-up + .tab + .adding-space .adding {
+  transform: rotate(0);
+}
+
+.adding-snip .sign-up:checked + .tab + .adding-space .add-pub-form {
+  transform: rotate(0);
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
+.clearfix:after,
+.clearfix:before {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hr {
+  height: 2px;
+  margin: 60px 0 50px 0;
+  background: rgba(57, 22, 184, 0.2);
+}
+
+.foot {
+  text-align: center;
+}
+
+.card {
+  width: 500px;
+  left: 100px;
+  margin-top: 30px;
+}
+
+::placeholder {
+  color: #b3b3b3;
+}
+
+div .role {
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+/* div .row {
+  margin-left: -40px;
+} */
+
+div .form-control-file {
+    margin-left: 45px;
+    color: wheat;
+    
+}
+div .form-control {
+    border: none;
+  border-radius: 25px;
+  background: rgba(14, 13, 13, 0.349);
+}
+.playerPic{
+  margin-left: 70%;
+}
+
+.Files {
+  font-family: sans-serif;
+  text-align: center;
+}
+h6{ color:rgb(247, 80, 3);}
+.upload--button{
+  margin-top: 20px;
+}
+img{
+  margin-right: 18%;
+  margin-bottom: 4%;
+}
