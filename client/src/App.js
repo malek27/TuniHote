@@ -19,6 +19,7 @@ import { current } from "./JS/actions/user";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 
 function App() {
   const user = useSelector((state) => state.userReducer.user);
@@ -64,7 +65,7 @@ function App() {
           {/* <RoleRoute path="/PubList" component={PubList} /> */}
           <Route path="/reservation" component={reservation} />
           <PrivateRoute path="/SingelPub/:id" 
-          render={(props)=> <SingelPub pub={pub&&pub} user={user&&user} {...props} />} /> 
+          render={(props)=> <SingelPub pub={pub&&pub} user={user&&user}  {...props} />} /> 
           <Route path="/EditPub" component={EditPub} />
           <Route path="/EditUser" component={EditUser} />
           {/* <Route path="/forget/password" component={forgetPassword} /> */}

@@ -37,7 +37,6 @@ const Nave = ({ history }) => {
             <NavDropdown.Divider />
             <NavDropdown.Item href="/reservation">Reservation</NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link href="/SignUp">Sing Up</Nav.Link>
           <Nav.Link
             onClick={() => {
               dispatch(logout());

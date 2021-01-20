@@ -50,15 +50,17 @@ router.get('/search/:titre', controllers.searchPub);
 //************************Comment*************************
 
 router.post("/comment/:idpost" ,isAuth(),controllers.addCom);
+router.get("/comments",isAuth(), controllers.getcoms );
 // router.put("/comment/:id", isAuth(), ,checkObjectId,controllers.editCom);
 // router.delete("/comment/:id", isAuth(), ,checkObjectId,controllers.deleteCom);
 
 
 //*************************Like************************
 
+// function(req, res){}
 
-router.put("/dislike/:id", isAuth(),  controllers.dislike)
-router.put("/like/:id", isAuth(),  controllers.like)
+router.put("/unlike/:idpost", isAuth(), controllers.unlike);
+router.put("/like/:idpost", isAuth(),  controllers.like)
 
 //*************************Rata************************
 

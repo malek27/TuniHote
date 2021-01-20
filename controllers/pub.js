@@ -18,9 +18,9 @@ exports.pub = async (req, res) => {
     info: { imageUrl },
   } = req.body;
   const userId = req.user._id;
- 
+  req.user.password = undefined;
 
-  console.log(user)
+  console.log(user);
   try {
     const newPub = new Pub({
       titre,
@@ -32,8 +32,8 @@ exports.pub = async (req, res) => {
       likers: [],
       comments: [],
     });
-    
-     // save the pub
+
+    // save the pub
     const newPube = await newPub.save();
     res.status(200).send({
       pub: newPube,
@@ -67,9 +67,10 @@ exports.getpubs = async (req, res) => {
 exports.getpubById = async (req, res) => {
   console.log("bject");
   try {
-    const result = await Pub.findOne({ _id: req.params.id }).populate(
-      "comments"
-    );
+    const result = await Pub.findOne({ _id: req.params.id })
+      .populate("comments")
+      .populate("likes")
+      .populate("dislikes");
 
     res.status(200).send({
       response: result,
@@ -139,7 +140,6 @@ exports.addCom = async (req, res) => {
   }
 
   try {
-    
     const user = await User.findById(req.user.id);
 
     const { text } = req.body;
@@ -151,100 +151,80 @@ exports.addCom = async (req, res) => {
 
     await newComment.save();
     // const comments = await Pub.findById(req.params.comments);
-     await Pub.findOneAndUpdate({ _id: req.params.idpost },{ $push: {comments: newComment } })
+    await Pub.findOneAndUpdate(
+      { _id: req.params.idpost },
+      { $push: { comments: newComment } }
+    );
     res.json(newComment);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
 };
+// get all com
+exports.getcoms = async (req, res) => {
+  try {
+    let result = await Comment.find().sort({ date: -1 }).populate("user");
+    res
+      .status(200)
+      .send({ response: result, message: "Getting comments successfully" });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "les commentaires nont pas etait afficher" });
+  }
+};
 
-// @route    PUT /pubs/like/:id
-// @desc     Like a pub
-// @access   Private
-
+//like
 exports.like = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
-    const pub = await Pub.findById(req.params.id);
+    const user = await User.findById(req.user.id);
 
-    // Check if the pub has already been liked
-    if (
-      pub.likes.filter((like) => like.user.toString() === req.user.id).length >
-      0
-    ) {
-      pub.likes = pub.likes.filter(
-        ({ user }) => user.toString() !== req.user.id
-      );
+    const newLikes = { user: user.id };
 
-      await pub.save();
+    await Pub.findOneAndUpdate(
+      { _id: req.params.idpost },
+      { $push: { likes: newLikes } }
+    );
 
-      return res.json(pub.likes);
-    } else if (
-      pub.dislikes.filter((dislike) => dislike.user.toString() === req.user.id)
-        .length > 0
-    ) {
-      pub.dislikes = pub.dislikes.filter(
-        ({ user }) => user.toString() !== req.user.id
-      );
-
-      await pub.save();
-
-      return res.json(pub.likes);
-    } else {
-      pub.likes.unshift({ user: req.user.id });
-
-      await pub.save();
-
-      res.json(pub.likes);
-    }
+    res.json(newLikes);
   } catch (err) {
-    console.error(err.message);
+    console.error("like",err.message);
     res.status(500).send("Server Error");
   }
 };
 
-// @route    PUT /pubs/dislike/:id
-// @desc     dislike a pub
-// @access   Private
-exports.dislike = async (req, res) => {
+//dislike
+exports.unlike = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
-    const pub = await Pub.findById(req.params.id);
+    const user = await User.findById(req.user.id);
 
-    // Check if the pub has already been liked/disliked
-    if (
-      pub.likes.filter((like) => like.user.toString() === req.user.id).length >
-      0
-    ) {
-      pub.likes = pub.likes.filter(
-        ({ user }) => user.toString() !== req.user.id
-      );
+    const newDislikes = { user: user.id };
 
-      await pub.save();
+    await Pub.findOneAndUpdate(
+      { _id: req.params.idpost },
+      { $pull: { likes: newDislikes }});
+      await Pub.findOneAndUpdate(
+        { _id: req.params.idpost },
+      { $push: { dislikes: newDislikes }});
 
-      return res.json(pub.dislikes);
-    } else if (
-      pub.dislikes.filter((dislike) => dislike.user.toString() === req.user.id)
-        .length > 0
-    ) {
-      pub.dislikes = pub.dislikes.filter(
-        ({ user }) => user.toString() !== req.user.id
-      );
-
-      await pub.save();
-
-      return res.json(pub.dislikes);
-    } else {
-      pub.dislikes.unshift({ user: req.user.id });
-
-      await pub.save();
-
-      res.json(pub.dislikes);
-    }
+    res.json(newDislikes);
   } catch (err) {
-    console.error(err.message);
+    console.error("unlike",err.message);
     res.status(500).send("Server Error");
   }
 };
+
 
 // rating
 
@@ -284,7 +264,7 @@ exports.ratingPub = async (req, res) => {
 };
 
 cron.schedule("* * * * *", async function () {
-  console.log("run every 60 sec");
+  // console.log("run every 60 sec");
   const pub = await Pub.find();
   pub.forEach((e) => {
     if (e.avg < 3) {

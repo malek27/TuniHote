@@ -1,18 +1,19 @@
 import React from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {useState,useEffect} from "react";
-import { getpubById } from "../../JS/actions/pub";
+import { getcoms, getpubById } from "../../JS/actions/pub";
 import CardComments from "../Commentaire/CardComments";
 import LikeButton from "../Like";
 import "./SingelPub.css";
-const SingelPub = ({ match, pub,user }) => {
+const SingelPub = ({ match,user }) => {
   const [showComments, setShowComments] = useState(false);
   const dispatch = useDispatch();
-// const pub = useSelector(state => state.pubReducer.pub)
+const pub = useSelector(state => state.pubReducer.pub)
   useEffect(() => {
     dispatch(getpubById(match.params.id));
+    dispatch(getcoms())
   }, [dispatch,match.params.id]);
 
   console.log(pub);
@@ -62,10 +63,11 @@ const SingelPub = ({ match, pub,user }) => {
               <div className="comment-icon">
                 <img
                   onClick={() => setShowComments(!showComments)}
-                  src="../../../public/img/icons/message1.svg"
+                  src="../img/icons/message1.svg"
                   alt="comment"
                 />
-                <span>{pub.comments.length === 0 ? "no comments":pub.comments.length}</span>  
+                {/* <span>{pub.comments.length === 0 ? "no comments":pub.comments.length}</span>   */}
+                {/* <span>{pub.comments.length}</span> */}
               </div>
               <LikeButton pub={pub&&pub} user={user&&user} />
             </div>

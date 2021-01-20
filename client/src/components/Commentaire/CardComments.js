@@ -1,57 +1,63 @@
-import React, { useState } from "react";
-import { useDispatch} from "react-redux";
-import { addComment, getpubById } from "../../JS/actions/pub";
-import { timestampParser } from "../Utils";
-import EditDeleteComment from "./EditDeleteComment";
+import React, { useState,useEffect } from "react";
+import { useDispatch,useSelector} from "react-redux";
+import { addComment, getcoms,getpubById} from "../../JS/actions/pub";
+import { Spinner } from "react-bootstrap";
+// import { timestampParser } from "../Utils";
+// import EditDeleteComment from "./EditDeleteComment";
 import "./Card.css";
+
 const CardComments = ({ pub, user }) => {
- 
-  const userId = user && user._id;
-  const userNom = user && user.nom;
-  const userPrenom = user && user.prenom;
+
+const dispatch = useDispatch();
+  // const userId = user && user._id;
 
   const [text, setText] = useState("");
-
-  const dispatch = useDispatch();
-
+   
+  useEffect(() => {
+    dispatch(getcoms())
+   }, [dispatch])
+const comments = useSelector(state => state.pubReducer.comments)
+const loadcoms = useSelector(state => state.pubReducer.loadcoms)
+console.log(comments)
   const handleComment = (e) => {
     e.preventDefault();
-
     if (text) {
-      dispatch(addComment(userId, text, userNom, userPrenom))
-        .then(() => dispatch(getpubById()))
-        .then(() => setText(""));
+      dispatch(addComment(pub._id, text));
     }
   };
+ 
+
+  const moment = require("moment");
 
   return (
     <div className="comments-container">
-      {pub.comments.map((comment) => {
+      {loadcoms ? (
+        <Spinner animation="border" variant="primary" />)
+        : ( comments&&comments.map((comment) => {
         return (
           <div
-            className={
-              comment.userId === userId
-                ? "comment-container client"
-                : "comment-container"
-            }
-            key={comment._id}
-          >
+            className=""
+              // comment.user._id === user.id
+              //   ? "comment-container client"
+              //   : "comment-container"
+            
+            key={comment._id} 
+          > 
             <div className="right-part">
               <div className="comment-header">
                 <div className="pseudo">
                   <h3>
-                    {comment.userPrenom}  
-                    {comment.userNom}
+                    {comment.user.prenom} {comment.user.nom}
                   </h3>
                 </div>
-                <span>{timestampParser(comment.timestamp)}</span>
+                <span>{moment().format("llll")}</span>
               </div>
               <p>{comment.text}</p>
-              <EditDeleteComment comment={comment} pub={pub} />
+              {/* <EditDeleteComment comment={comment} pub={pub} /> */}
             </div>
-          </div>
-        );
-      })}
+           </div>
+        );}))}
+        
       <form action="" onSubmit={handleComment} className="comment-form">
         <input
           type="text"

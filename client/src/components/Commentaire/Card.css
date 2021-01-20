@@ -191,9 +191,14 @@
 .card-container .card-right .card-footer img:hover {
     transform: scale(1.2);
 }
+.card-footer{
+    background-color:transparent !important;
+    border-top:none !important;
+}
 .card-container .card-right .card-footer .comment-icon, .card-container .card-right .card-footer .like-container {
     display: flex;
     align-items: center;
+    
 }
 .card-container .card-right .card-footer .comment-icon span, .card-container .card-right .card-footer .like-container span {
     font-size: 1.02rem;

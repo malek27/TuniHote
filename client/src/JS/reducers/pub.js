@@ -8,8 +8,8 @@ import {
   DELETE_PUB,
   EDIT_PUB,
   ADD_COMMENT,
-  REMOVE_COMMENT,
-  EDIT_COMMENT,
+  GET_ALL_COMS,
+  LOAD_COMS,
   UPDATE_LIKES,
   UPDATE_DISLIKES,
   RATE,
@@ -18,12 +18,13 @@ import {
 const initiState = {
   pubs: [],
   loadpub: false,
+  loadcoms: false,
   errors: null,
   pub: {},
   isUpdated: false,
   comments: [],
-  likes:[],
-  dislike:[]
+  likes: [],
+  dislikes: [],
 };
 
 export const pubReducer = (state = initiState, { type, payload }) => {
@@ -33,6 +34,8 @@ export const pubReducer = (state = initiState, { type, payload }) => {
 
     case LOAD_PUB:
       return { ...state, loadpub: true };
+    case LOAD_COMS:
+      return { ...state, loadcoms: true };
 
     case FAIL_PUB:
       return { ...state, loadpub: false, errors: payload };
@@ -53,46 +56,25 @@ export const pubReducer = (state = initiState, { type, payload }) => {
     case UPDATE_LIKES:
       return {
         ...state,
-        pubs: state.pubs.map((pub) =>
-          pub._id === payload.id ? { ...pub, likes: payload.likes } : pub
-        ),
-        loading: false,
+        likes: [...state.likes, payload.user],
+        loadpub: false,
       };
 
     case UPDATE_DISLIKES:
       return {
         ...state,
-        pubs: state.pubs.map((pub) =>
-          pub._id === payload.id
-            ? { ...pub, dislikes: payload.dislikes }
-            : pub
-        ),
-        loading: false,
+        dislikes: [...state.dislikes, payload.user],
+        loadpub: false,
       };
 
     case ADD_COMMENT:
       return {
         ...state,
-        pub: { ...state.pub, comments: payload },
-        loading: false,
+        comments: [...state.comments, payload.user],
+        loadcoms: false,
       };
-    case REMOVE_COMMENT:
-      return {
-        ...state,
-        pub: {
-          ...state.pub,
-          comments: state.pub.comments.filter(
-            (comment) => comment._id !== payload
-          ),
-        },
-        loading: false,
-      };
-      case EDIT_COMMENT:
-        return {
-          ...state,
-          pub: { ...state.pub, comments: payload },
-          loading: false,
-        };
+    case GET_ALL_COMS:
+      return { ...state, loadcoms: false, comments: payload };
     case RATE:
       return {
         ...state,

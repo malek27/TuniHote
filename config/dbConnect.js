@@ -4,6 +4,7 @@ const connectDB = async () => {
       await mongoose.connect(process.env.DB_URI, {
         useUnifiedTopology: true,
         useNewUrlParser: true,
+        useFindAndModify: false,
       });
       console.log("databse is connected");
     } catch (error) {
