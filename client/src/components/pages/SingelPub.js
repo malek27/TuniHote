@@ -3,7 +3,7 @@ import { Button, Col, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { addReservasion, getcoms, getpubById } from "../../JS/actions/pub";
+import { addReservation, getcoms, getpubById } from "../../JS/actions/pub";
 import CardComments from "../Commentaire/CardComments";
 import ListComments from "../Commentaire/ListComments";
 
@@ -34,7 +34,7 @@ const SingelPub = ({ match, user }) => {
   const handleReserve = (e) => {
     e.preventDefault();
     if ({ dateDebut, dateFin }) {
-      dispatch(addReservasion(pub._id, dateDebut, dateFin));
+      dispatch(addReservation(pub._id, dateDebut, dateFin));
     }
   };
 

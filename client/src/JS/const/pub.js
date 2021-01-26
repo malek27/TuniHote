@@ -18,6 +18,6 @@ export const RATE = "RATE";
 export const UPDATE_LIKES = 'UPDATE_LIKES';
  export const UPDATE_DISLIKES = "UPDATE_DISLIKES";
  //reserv
- export const LOAD_RESERVASION = "LOAD_RESERVASION";
- export const GET_ALL_RESERVASION = "GET_ALL_RESERVASION";
+ export const LOAD_RESERVATION = "LOAD_RESERVATION";
+ export const GET_ALL_RESERVATION = "GET_ALL_RESERVATION";
 

@@ -27,7 +27,7 @@ const PubSchema = new Schema({
   comments :[{ type: Schema.Types.ObjectId, ref: "comment" }],
   likes: [{ user: { type: Schema.Types.ObjectId, ref: "user" } }],
   dislikes: [{ user: { type: Schema.Types.ObjectId, ref: "user" } }],
-  reservasions: [{ user: { type: Schema.Types.ObjectId, ref: "reservasion" } },],
+  reservations: [{ user: { type: Schema.Types.ObjectId, ref: "reservation" } },],
  
 
   date: {

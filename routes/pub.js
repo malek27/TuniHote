@@ -66,7 +66,7 @@ router.put("/like/:idpost", isAuth(),  controllers.like)
 // router.post('/rate/:id' , isAuth(), controllers.ratingPub);
 //*************************sendMail************************
 router.post("/Mailreserver/:idpost",isAuth(), controllers.sendMail );
-router.post("/reserver/:idpost",isAuth(), controllers.addreservasion );
-router.get("/reservasions",isAuth(), controllers.getreservasions );
+router.post("/reserver/:idpost",isAuth(), controllers.addreservation );
+router.get("/reservations",isAuth(), controllers.getreservations );
 router.get('/mypubs',isAuth(),controllers.Mypubs);
 module.exports = router;

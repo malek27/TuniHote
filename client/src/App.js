@@ -12,8 +12,8 @@ import Error from "./components/pages/Error";
 import AddPub from "./components/AddPub/AddPub";
 import EditPub from "./components/Edit/EditPub";
 import EditUser from "./components/Edit/EditUser";
-import ReservasionM from "./components/ReservasionM";
-import ReservasionU from "./components/ReservasionU";
+import ReservationM from "./components/ReservationM";
+import ReservationU from "./components/ReservationU";
 import Home from "./components/pages/Home";
 import ListeUser from "./components/ListeUser";
 import ListePub from "./components/ListePub";
@@ -68,9 +68,9 @@ function App() {
           <Route path="/SignUp" component={SignUp} />
           <RoleRoute path="/AddPub" component={AddPub} />
           <Admin path="/ListePub" component={ListePub} />
-          <RoleRoute path="/reservasionM" component={ReservasionM} />
+          <RoleRoute path="/reservationM" component={ReservationM} />
           <RoleRoute path="/mypubs" component={Mypubs} />
-          <PrivateRoute path="/reservationU" component={ReservasionU} />
+          <PrivateRoute path="/reservationU" component={ReservationU} />
           <PrivateRoute path="/SingelPub/:id" 
           render={(props)=> <SingelPub pub={pub&&pub} user={user&&user}  {...props} />} /> 
           <Route path="/EditPub/:id" component={EditPub} />

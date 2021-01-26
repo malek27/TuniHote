@@ -1,7 +1,7 @@
 const Pub = require("../models/Pub");
 const User = require("../models/User");
 const Comment = require("../models/Comment");
-const Reservasion = require('../models/Reservation')
+const Reservation = require('../models/Reservation')
 var cron = require("node-cron");
 require("dotenv").config();
 const { validationResult } = require("express-validator");
@@ -295,7 +295,7 @@ cron.schedule("* * * * *", async function () {
 
 //******************************************************
 //add reservation
-exports.addreservasion = async (req, res) => {
+exports.addreservation = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -305,20 +305,20 @@ exports.addreservasion = async (req, res) => {
     const user = await User.findById(req.user.id);
 
     const { dateDebut,dateFin } = req.body;
-    const newReservasion = new Reservasion({
+    const newReservation = new Reservation({
       dateDebut,
       dateFin,
       user: user.id,
       pub: req.params.idpost,
     });
 
-    await newReservasion.save();
+    await newReservation.save();
 
     await Pub.findOneAndUpdate(
       { _id: req.params.idpost},
-      { $push: { reservasions: newReservasion } }
+      { $push: { reservations: newReservation } }
     );
-    res.json(newReservasion);
+    res.json(newReservation);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -326,16 +326,16 @@ exports.addreservasion = async (req, res) => {
 };
 
 // get all resrvs
-exports.getreservasions = async (req, res) => {
+exports.getreservations = async (req, res) => {
   try {
-    let result = await Reservasion.find().sort({ date: -1 }).populate("user").populate("pub","_id titre postedBy");
+    let result = await Reservation.find().sort({ date: -1 }).populate("user").populate("pub","_id titre postedBy");
     res
       .status(200)
-      .send({ response: result, message: "Getting reservasions successfully" });
+      .send({ response: result, message: "Getting reservations successfully" });
   } catch (error) {
     res
       .status(500)
-      .send({ message: "les reservasions nont pas etait afficher" });
+      .send({ message: "les reservations nont pas etait afficher" });
   }
 };
 

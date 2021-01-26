@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const moment = require("moment");
 
-const ReservasionSchema = new Schema({
+const ReservationSchema = new Schema({
     
       user: { type: Schema.Types.ObjectId, ref: "user" },
       pub: { type: Schema.Types.ObjectId, ref: "pub" },
@@ -13,4 +13,4 @@ const ReservasionSchema = new Schema({
        });
     
 
-module.exports = mongoose.model("reservasion", ReservasionSchema);
+module.exports = mongoose.model("reservation", ReservationSchema);

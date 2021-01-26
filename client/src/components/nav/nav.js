@@ -44,7 +44,7 @@ const Nave = ({ history }) => {
             <NavDropdown.Item href="/addPub">Add pub</NavDropdown.Item>
             <NavDropdown.Item href="/mypubs">My pub</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="/reservasionM">Reservation</NavDropdown.Item>
+            <NavDropdown.Item href="/reservationM">Reservation</NavDropdown.Item>
             <NavDropdown.Item href="/ListeUser">Liste user</NavDropdown.Item>
             <NavDropdown.Item href="/ListePub">Liste pub</NavDropdown.Item>
           </NavDropdown>
@@ -87,7 +87,7 @@ const Nave = ({ history }) => {
             <NavDropdown.Item href="/addPub">Add pub</NavDropdown.Item>
             <NavDropdown.Item href="/mypubs">My pub</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="/reservasionM">Reservation</NavDropdown.Item>
+            <NavDropdown.Item href="/reservationM">Reservation</NavDropdown.Item>
           </NavDropdown>
           <Nav.Link
             onClick={() => {
@@ -125,7 +125,7 @@ const Nave = ({ history }) => {
           <Nav.Link href="/AboutUs">About Us</Nav.Link>
           <NavDropdown title="Option" id="basic-nav-dropdown">
           <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
-          <NavDropdown.Item href="/reservasionU">Reservation</NavDropdown.Item>
+          <NavDropdown.Item href="/reservationU">Reservation</NavDropdown.Item>
           </NavDropdown>
           <Nav.Link href="/SignUp">Sing Up</Nav.Link>
           <Nav.Link

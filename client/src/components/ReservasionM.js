@@ -2,35 +2,35 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "react-bootstrap";
 import { useEffect } from "react";
-import { getReservasion } from "../JS/actions/pub";
-const ReservasionM = () => {
-  let reservasions = useSelector((state) => state.pubReducer.reservasions);
+import { getReservation } from "../JS/actions/pub";
+const ReservationM = () => {
+  let reservations = useSelector((state) => state.pubReducer.reservations);
   let loadresrvs = useSelector((state) => state.pubReducer.loadresrvs);
   let pub = useSelector((state) => state.pubReducer.pub);
-  // let postedBy = useSelector((state) => state.pubReducer.reservasions.pub.postedBy);
+  // let postedBy = useSelector((state) => state.pubReducer.reservations.pub.postedBy);
   let user = useSelector((state) => state.userReducer.user);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getReservasion());
+    dispatch(getReservation());
   }, [dispatch]);
 
   console.log(loadresrvs);
-  console.log(reservasions);
+  console.log(reservations);
   console.log(pub);
   
   const myReserv = pub.postedBy == user._id   
 
   return (
     <div>
-      <h2>Reservasion</h2>
+      <h2>Reservation</h2>
       {loadresrvs  ? (
         <Spinner animation="border" variant="primary" />
-      ) :  myReserv ? ( reservasions.map((reservasion) => ( 
-          <div className="reservasion" key={reservasion._id}>
+      ) :  myReserv ? ( reservations.map((reservation) => ( 
+          <div className="reservations" key={reservation._id}>
             
             <h5>
-              l'utilisateur : {reservasion.user["nom"]} {reservasion.user["prenom"]}  veut reserver : {reservasion.pub.titre} , du {reservasion.dateDebut}  au {reservasion.dateFin}
+              l'utilisateur : {reservation.user["nom"]} {reservation.user["prenom"]}  veut reserver : {reservation.pub.titre} , du {reservation.dateDebut}  au {reservation.dateFin}
             </h5>
             <div>
             <button>accepter</button>
@@ -43,7 +43,7 @@ const ReservasionM = () => {
   );
 };
 
-export default ReservasionM;
+export default ReservationM;
 
 
 {/* } */}
