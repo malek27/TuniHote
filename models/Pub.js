@@ -24,10 +24,10 @@ const PubSchema = new Schema({
     required: true,
   },
   postedBy: { type: Schema.Types.ObjectId, ref: "user" },
-  // posterEmail:{ type: Schema.Types.ObjectId, ref: "user" },
   comments :[{ type: Schema.Types.ObjectId, ref: "comment" }],
   likes: [{ user: { type: Schema.Types.ObjectId, ref: "user" } }],
   dislikes: [{ user: { type: Schema.Types.ObjectId, ref: "user" } }],
+  reservasions: [{ user: { type: Schema.Types.ObjectId, ref: "reservasion" } },],
  
 
   date: {

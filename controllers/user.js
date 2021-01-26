@@ -1,10 +1,7 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-// const sgMail = require('@sendgrid/mail');
-// sgMail.setApiKey(process.env.MAIL_KEY);
-// const { validationResult } = require('express-validator');
-// const _ = require('lodash');
+
 exports.register = async (req, res) => {
   const { nom, prenom, email, adresse, cin, numero, motDePasse, role } = req.body;
   try {

@@ -14,15 +14,19 @@ const EditUser = () => {
   const [cin, setCin] = useState("");
   const [numero, setNumero] = useState("");
   const user = useSelector((state) => state.userReducer.user);
-  const id = user._id;
+  const id = user && user._id;
   const dispatch = useDispatch();
   const history = useHistory();
   return (
     <div className="edit">
+    
       <div>
         <div>
           <div>
             <div className="groups">
+            <h3>Edit user</h3>
+            <br/>
+            <br/>
               <div className="group">
                 <label htmlFor="user" className="label">
                   Nom
@@ -94,6 +98,8 @@ const EditUser = () => {
                   placeholder="entrer votre Numero"
                   onChange={(e) => setNumero(e.target.value)}
                 />
+                <br/>
+                <br/>
                 <Link to="/Profile" >
                   <input
                     type="submit"

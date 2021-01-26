@@ -1,10 +1,19 @@
-
 .emp-profile {
   padding: 3%;
   margin-top: 3%;
   margin-bottom: 3%;
   border-radius: 0.5rem;
-  background: #fff;
+  background: #f2994a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #f2c94c,
+    #f2994a
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #f2c94c,
+    #f2994a
+  )!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .profile-img {
   text-align: center;
@@ -80,20 +89,19 @@
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  margin-left: 20%;
+  margin-left: -4%;
 }
 
 .col-md-8 {
   margin-left: 26%;
 }
-img {
+.profile {
   margin-left: 16%;
 }
-/* div .row {
-  margin-left: -166px;
-}
-.row{margin-top: 1%;} */
 
 input {
   margin-top: 3%;
+}
+form {
+  margin-left: -19%;
 }

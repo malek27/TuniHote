@@ -1,9 +1,10 @@
 import React from "react";
 import { editPub } from "../../JS/actions/pub";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState} from "react"; //useEffect 
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+// import {getpubById} from "../../JS/actions/pub"
 import "./EditPub.css";
 
 const EditPub = () => {
@@ -12,8 +13,11 @@ const EditPub = () => {
   const [prix, setPrix] = useState("");
   const dispatch = useDispatch();
   const pub = useSelector((state) => state.pubReducer.pub);
-  const id = pub._id;
+  const id = pub && pub._id;
   const history = useHistory();
+  // useEffect(() => {
+  //   dispatch(getpubById(pub._id))
+  // }, [])
   return (
     <div>
       <div className="row">

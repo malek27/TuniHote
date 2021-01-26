@@ -1,7 +1,10 @@
-div .pub {
+div .cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 50px;
-    padding: 15px;
-}
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .spinner{
+    margin-left: 48%;
+  }

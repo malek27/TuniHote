@@ -194,10 +194,11 @@ a {
   text-align: center;
 }
 
-.card {
+.carde {
   width: 500px;
-  left: 100px;
+  left: 0px !important;
   margin-top: 30px;
+  margin-left: 6%;
 }
 
 ::placeholder {
@@ -208,12 +209,7 @@ div .role {
   padding-top: 3%;
   padding-bottom: 3%;
 }
-/* div .row {
-  margin-left: -215px;
-} */
-/* Form {
-  display: flex;
-} */
+
 div h4 {
   margin: 2% 0% 0% -22%;
 }

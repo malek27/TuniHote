@@ -1,11 +1,14 @@
 const Pub = require("../models/Pub");
 const User = require("../models/User");
 const Comment = require("../models/Comment");
+const Reservasion = require('../models/Reservation')
 var cron = require("node-cron");
-const { Schema } = require("mongoose");
 require("dotenv").config();
 const { validationResult } = require("express-validator");
 const user = require("../models/User");
+const nodemailer = require('nodemailer')
+const log = require('log')
+require('dotenv').config();
 
 // post pub
 
@@ -52,7 +55,7 @@ exports.pub = async (req, res) => {
 
 exports.getpubs = async (req, res) => {
   try {
-    let result = await Pub.find().sort({ date: -1 }).populate("postedBy");
+    let result = await Pub.find().sort({ date: -1 }).populate("postedBy","_id prenom");
     res
       .status(200)
       .send({ response: result, message: "Getting pubs successfully" });
@@ -116,9 +119,9 @@ exports.updatePub = async (req, res) => {
 
 exports.searchPub = async (req, res) => {
   try {
-    const re = new RegExp(req.params.titre, "i");
+    const re = new RegExp(req.params.region, "i");
     const pub = await Pub.find({
-      $or: [{ titre: { $regex: re } }, { titre: { $regex: re } }],
+      $or: [{ region: { $regex: re } }, { region: { $regex: re } }],
     });
 
     //
@@ -150,7 +153,7 @@ exports.addCom = async (req, res) => {
     });
 
     await newComment.save();
-    // const comments = await Pub.findById(req.params.comments);
+
     await Pub.findOneAndUpdate(
       { _id: req.params.idpost },
       { $push: { comments: newComment } }
@@ -174,6 +177,24 @@ exports.getcoms = async (req, res) => {
       .send({ message: "les commentaires nont pas etait afficher" });
   }
 };
+//Get a coms by id
+
+// exports.getcomsById = async (req, res) => {
+//   try {
+//     const result = await Comment.findOne({ _id: req.params.id })
+//       .populate("pub")
+      
+
+//     res.status(200).send({
+//       response: result,
+//       message: "Got the desired comments successfullY !",
+//     });
+//   } catch (e) {
+//     res.status(500).send({ message: "there is no comments with this id !" });
+//   }
+// };
+
+
 
 //like
 exports.like = async (req, res) => {
@@ -237,7 +258,6 @@ exports.ratingPub = async (req, res) => {
     ) {
       return res.status(400).json({ msg: "Post already rated" });
     }
-    // pub.rate.unshift({ user: req.user.id });
 
     const newrate = {
       rating: req.body.rating,
@@ -274,3 +294,96 @@ cron.schedule("* * * * *", async function () {
 });
 
 //******************************************************
+//add reservation
+exports.addreservasion = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const user = await User.findById(req.user.id);
+
+    const { dateDebut,dateFin } = req.body;
+    const newReservasion = new Reservasion({
+      dateDebut,
+      dateFin,
+      user: user.id,
+      pub: req.params.idpost,
+    });
+
+    await newReservasion.save();
+
+    await Pub.findOneAndUpdate(
+      { _id: req.params.idpost},
+      { $push: { reservasions: newReservasion } }
+    );
+    res.json(newReservasion);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
+// get all resrvs
+exports.getreservasions = async (req, res) => {
+  try {
+    let result = await Reservasion.find().sort({ date: -1 }).populate("user").populate("pub","_id titre postedBy");
+    res
+      .status(200)
+      .send({ response: result, message: "Getting reservasions successfully" });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "les reservasions nont pas etait afficher" });
+  }
+};
+
+
+//reservation mail
+exports.sendMail= async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    const pub = await Pub.findById({ _id: req.params.idpost })
+  
+// Step 1
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+      user: process.env.EMAIL_ADDRESS ,
+      pass: process.env.EMAIL_PASSWORD 
+}});
+
+// Step 2
+let mailOptions = {
+  from: process.env.EMAIL_FROM, 
+  to: `${pub.postedBy.email}`,
+  subject: 'reservation',
+  text: `cette personne ${user.email} veut faire une reservation concernant cette publication ${pub.titre}
+  veuillez vous connecter a votre plateforme pour confirmer/decliner la demande`  
+};
+
+// Step 3
+transporter.sendMail(mailOptions, (err, data) => {
+  if (err) {
+      return log('Error occurs');
+  }
+  return log('Email sent!!!');
+})} catch (err) {
+  console.error("sendMail",err.message);
+  res.status(500).send("Server Error");
+}
+};
+
+
+
+exports.Mypubs = async (req,res)=>{
+  Pub.find({postedBy:req.user._id})
+  .populate("postedBy","_id prenom")
+  .then(mypubs=>{
+      res.json({mypubs})
+  })
+  .catch(err=>{
+      console.log(err)
+  })
+}

@@ -7,15 +7,15 @@ body {
 }
 
 .total{
-  margin-left: 333px;
+  margin-left: 50px;
 }
 .adding-box {
   width: 100%;
   margin: auto;
   max-width: 525px;
-  min-height: 938px;
+  min-height: 984px;
   position: relative;
-  background: url(https://image.freepik.com/photos-gratuite/cabane-brune-foret_249578-1721.jpg);
+  /* background: url(https://image.freepik.com/photos-gratuite/cabane-brune-foret_249578-1721.jpg); */
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
@@ -48,6 +48,7 @@ body {
   font-size: 22px;
   margin-right: 15px;
   margin-top: 30px;
+  margin-left: 6%;
   padding-bottom: 5px;
   margin: 26px 15px 33px 0;
   display: inline-block;
@@ -198,7 +199,7 @@ a {
 
 .card {
   width: 500px;
-  left: 100px;
+  left: 100px !important;
   margin-top: 30px;
 }
 
@@ -236,7 +237,18 @@ h6{ color:rgb(247, 80, 3);}
 .upload--button{
   margin-top: 20px;
 }
-img{
+/* img{
   margin-right: 18%;
   margin-bottom: 4%;
+} */
+
+button.btn.btn-primary {
+  margin:3% 0% 0% 8%
+}
+.custom-file{
+  width: 73% !important;
+  margin-left: 15%;
+}
+.progress{
+  overflow:visible;
 }

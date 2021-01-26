@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  // _id: mongoose.Schema.Types.ObjectId,
+
   nom: {
     type: String,
   },
@@ -30,6 +30,7 @@ const userSchema = new Schema({
     type: String,
     default: "utilisateur"
   },
+  // mypubs: [{ type: Schema.Types.ObjectId, ref: "pub" }],
   isAdmin:{ type:Boolean, default:false, }
 });
 

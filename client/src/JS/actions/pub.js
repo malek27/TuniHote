@@ -11,6 +11,9 @@ import {
   GET_ALL_COMS,
   RATE,
   LOAD_COMS,
+  GET_ALL_RESERVASION,
+  LOAD_RESERVASION,
+  GET_MY_PUB
 } from "../const/pub";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -30,11 +33,10 @@ export const registerPub = (pub, userId, history) => async (dispatch) => {
     history.push("/Home");
   } catch (error) {
     console.log(error);
-    const { errors } = error.response.data;
-    if (Array.isArray(errors)) {
-      errors.forEach((e) => alert(e.message));
-    }
-    //dispatch({ type: FAIL_PUB, payload: error.response.data });
+    // const { errors } = error.response.data;
+    // if (Array.isArray(errors)) {
+    //   errors.forEach((e) => alert(e.message));
+    // }
   }
 };
 
@@ -60,8 +62,22 @@ export const getpubs = () => async (dispatch) => {
   dispatch({ type: LOAD_PUB });
 
   try {
-    let result = await axios.get("/pub");
+    let result = await axios.get("/pub/");
     dispatch({ type: GET_ALL_PUB, payload: result.data.response });
+  } catch (e) {
+    dispatch({ type: FAIL_PUB, payload: e.message });
+  }
+};
+
+// get all Mypubs
+
+export const getMypubs = () => async (dispatch) => {
+  const options = { headers: { authorization: localStorage.getItem("token") } };
+  dispatch({ type: LOAD_PUB });
+
+  try {
+    let result = await axios.get("/pub/mypubs",options);
+    dispatch({ type: GET_MY_PUB, payload: result.data.mypubs });
   } catch (e) {
     dispatch({ type: FAIL_PUB, payload: e.message });
   }
@@ -69,9 +85,9 @@ export const getpubs = () => async (dispatch) => {
 
 // search pub
 
-export const filterPub = (titre) => async (dispatch) => {
+export const filterPub = (region) => async (dispatch) => {
   try {
-    let result = await axios.get(`/pub/search/${titre}`);
+    let result = await axios.get(`/pub/search/${region}`);
     dispatch({ type: FILTER_PUB, payload: result.data });
   } catch (e) {
     dispatch({ type: FAIL_PUB, payload: e.message });
@@ -105,7 +121,7 @@ export const editPub = (id, pub, history) => async (dispatch) => {
   try {
     let result = await axios.put(`/pub/SingelPub/${id}`, pub, options);
     dispatch({ type: EDIT_PUB, payload: result.data });
-    history.push(`/SingelPub/${id}`);
+    // history.push(`/SingelPub/${id}`);
     dispatch(getpubById(id));
   } catch (e) {
     dispatch({ type: FAIL_PUB, payload: e.message });
@@ -116,7 +132,7 @@ export const editPub = (id, pub, history) => async (dispatch) => {
 
 export const addComment = (pubid, text) => async (dispatch) => {
   const options = { headers: { authorization: localStorage.getItem("token") } };
-  dispatch({ type: LOAD_COMS });
+  // dispatch({ type: LOAD_COMS });
   try {
     const res = await axios.post(`/pub/comment/${pubid}`, { text }, options);
     console.log("res com", res);
@@ -172,6 +188,37 @@ export const unlikePost = (pubid) => async (dispatch) => {
     dispatch({
       type: FAIL_PUB,
     });
+  }
+};
+
+//add reservation
+export const addReservasion = (pubid, dateDebut,dateFin) => async (dispatch) => {
+  const options = { headers: { authorization: localStorage.getItem("token") } };
+  // dispatch({ type: LOAD_RESERVASION });
+  try {
+    const res = await axios.post(`/pub/reserver/${pubid}`, { dateDebut,dateFin }, options);
+    console.log("res reservasion", res);
+ 
+    dispatch(getpubById(pubid));
+
+    alert("Reservasion Added", "success");
+  } catch (err) {
+    dispatch({
+      type: FAIL_PUB,
+      payload: { msg: err.response.data.msg, status: err.response.status },
+    });
+  }
+};
+
+//get all reserv
+export const getReservasion = () => async (dispatch) => {
+  const options = { headers: { authorization: localStorage.getItem("token") } };
+  dispatch({ type: LOAD_RESERVASION });
+  try {
+    let result = await axios.get("/pub/reservasions", options);
+    dispatch({ type: GET_ALL_RESERVASION, payload: result.data.response });
+  } catch (e) {
+    dispatch({ type: FAIL_PUB, payload: e.message });
   }
 };
 

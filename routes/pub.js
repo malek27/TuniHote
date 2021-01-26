@@ -6,7 +6,6 @@ const {
     addComtValidator
 } = require("../middleware/validator");
 const isAuth = require("../middleware/passport");
-const checkObjectId = require("../middleware/check")
 
 //@method POST
 //@desc POST A PUB
@@ -44,7 +43,7 @@ router.delete("/:id",isAuth(), controllers.deletePub );
 router.put("/SingelPub/:id", isAuth(), controllers.updatePub);
 
 //search
-router.get('/search/:titre', controllers.searchPub);
+router.get('/search/:region', controllers.searchPub);
 
 
 //************************Comment*************************
@@ -65,5 +64,9 @@ router.put("/like/:idpost", isAuth(),  controllers.like)
 //*************************Rata************************
 
 // router.post('/rate/:id' , isAuth(), controllers.ratingPub);
-
+//*************************sendMail************************
+router.post("/Mailreserver/:idpost",isAuth(), controllers.sendMail );
+router.post("/reserver/:idpost",isAuth(), controllers.addreservasion );
+router.get("/reservasions",isAuth(), controllers.getreservasions );
+router.get('/mypubs',isAuth(),controllers.Mypubs);
 module.exports = router;

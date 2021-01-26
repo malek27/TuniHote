@@ -20,4 +20,4 @@ const upload = multer({ storage : storage, fileFilter: filerFilter });
 
 module.exports = upload.single("categoryImage")
 // array('images', 100)
-// single("categoryImage")
+

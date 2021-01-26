@@ -146,10 +146,10 @@ const AddPub = () => {
                     aria-valuemin={0}
                     aria-valuemax={100}
                   >
-                    {progressPercent}
+                    {progressPercent}%
                   </div>
                   <form onSubmit={handleSubmit}>
-                    <div className="custom-file mb-3">
+                    <div className="custom-file mb-3 w-73">
                       <input
                         onChange={upload}
                         id="inputGroupeFile04"
@@ -177,7 +177,7 @@ const AddPub = () => {
                   )}
                 </div>
                 <div className="group">
-                  <Link to="/Home" s>
+                  <Link to="/Home" >
                     <button
                       type="submit"
                       className="button"

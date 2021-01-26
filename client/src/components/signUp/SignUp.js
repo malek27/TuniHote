@@ -18,7 +18,7 @@ const SignUp = () => {
   return (
     <div className="row">
       <div >
-        <div className="card">
+        <div className="carde">
           <div className="login-box">
             <div className="login-snip">
               <input

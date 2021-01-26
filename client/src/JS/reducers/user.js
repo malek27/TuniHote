@@ -12,7 +12,6 @@ import {
 } from "../const/user";
 
 const initiState = {
-  //user: null,
   loadUser: false,
   errors: null,
   isAuth: false,
@@ -20,6 +19,7 @@ const initiState = {
   user: {},
   isUpdated: false,
   role: "",
+  isAdmin : false,
 };
 
 export const userReducer = (state = initiState, { type, payload }) => {
@@ -27,10 +27,12 @@ export const userReducer = (state = initiState, { type, payload }) => {
     case REGISTER_USER:
       localStorage.setItem("token", payload.token);
       localStorage.setItem("role", payload.user.role);
+      localStorage.setItem("isAdmin", payload.user.isAdmin);
       return { ...state, loadUser: false, user: payload.user, isAuth: true };
     case LOGIN_USER:
       localStorage.setItem("token", payload.token);
       localStorage.setItem("role", payload.user.role);
+      localStorage.setItem("isAdmin", payload.user.isAdmin);
 
       return { ...state, loadUser: false, user: payload.user, isAuth: true };
     case LOAD_USER:
@@ -42,6 +44,7 @@ export const userReducer = (state = initiState, { type, payload }) => {
     case LOGOUT_USER:
       localStorage.removeItem("token");
       localStorage.removeItem("role");
+      localStorage.removeItem("isAdmin");
       return { user: null, loadUser: false, errors: null, isAuth: false };
     case GET_ALL_USER:
       return { ...state, loadUser: false, users: payload };
@@ -50,9 +53,10 @@ export const userReducer = (state = initiState, { type, payload }) => {
     case DELETE_USER:
       localStorage.removeItem("token");
       localStorage.removeItem("role");
+      localStorage.removeItem("isAdmin");
       return { ...state,user:payload, loadUser: false, isAuth: false };
     case EDIT_USER:
-      return { ...state, loadpub: false, user: payload.user , isUpdated:true };
+      return { ...state, loadUser: false, user: payload.user , isUpdated:true };
 
     default:
       return state;

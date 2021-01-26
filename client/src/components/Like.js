@@ -2,11 +2,11 @@ import React, { useState } from "react";
 // import { UidContext } from "../components/AppContext";
 // import Popup from "reactjs-popup";
 // import "reactjs-popup/dist/index.css";
-import { useDispatch} from "react-redux";
+import { useDispatch,useSelector} from "react-redux";
 import { likePost, unlikePost } from "../JS/actions/pub";
 
 const LikeButton = ({ pub,user}) => {
-  // const user = useSelector(state => state.userReducer.user);
+  const likes = useSelector((state) => state.pubReducer.likes);
   const userId=user&&user._id;
   
   const [liked, setLiked] = useState(false);
@@ -23,29 +23,16 @@ const LikeButton = ({ pub,user}) => {
     setLiked(false);
   };
 
-  // useEffect(() => {
-  //   if (pub.likes.includes(user.id)) setLiked(true); 
-  //   else setLiked(false);
-  // }, [user.id, pub.likes, liked]);
-
   return (
     <div className="like-container">
-      {/* {user._id === null && (
-        <div
-          trigger={<img src="./img/icons/heart.svg" alt="like" />}
-          position={["bottom center", "bottom right", "bottom left"]}
-          closeOnDocumentClick
-        >
-          <div>Connectez-vous pour aimer une pub !</div>
-        </div>
-      )} */}
+     
       {liked === false && (
         <img src="../img/icons/heart.svg" onClick={like} alt="like" />
       )}
       {liked && (
         <img src="../img/icons/heart-filled.svg" onClick={unlike} alt="unlike" />
       )}
-      {/* <span>{pub.likes.length}</span> */}
+      <span>{likes.length && likes.length}</span>
     </div>
   );
 };

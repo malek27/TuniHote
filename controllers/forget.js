@@ -1,10 +1,10 @@
 const crypto = require('crypto');
 const User = require('../models/User');
 const nodemailer = require('nodemailer');
-const router = require('express').Router();
+
 require('dotenv').config();
 var async = require('async');
-const bcrypt = require("bcrypt");
+
 
 
 /***************Send Mail with reset Token****************** */

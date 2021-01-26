@@ -3,6 +3,7 @@ import "./Utilisateur.css";
 import { useSelector,useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {deleteUserById} from "../../JS/actions/user"
+import { editUser } from "../../JS/actions/user";
 
 
 const Utilisateur = () => {
@@ -18,7 +19,7 @@ const Utilisateur = () => {
           <div className="row" style={{ marginTop: 25 }}>
             <div className="col-md-4">
               <div className="profile-img">
-                <img
+                <img className="profile"
                   src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
                   alt="avatar"
                 />
@@ -50,6 +51,7 @@ const Utilisateur = () => {
                 className="profile-edit-btn"
                 name="btnAddMore"
                 value="Edit Profile"
+                onClick={() => dispatch(editUser(id))}
               /></Link>
               <Link to="/Home"><input
                 type="submit"

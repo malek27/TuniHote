@@ -1,7 +1,7 @@
 console.clear();
 const express = require("express");
 const connectDB = require("./config/dbConnect");
-const path = require("path");
+const nodemailer = require('nodemailer')
 require("dotenv").config();
 const app = express();
 

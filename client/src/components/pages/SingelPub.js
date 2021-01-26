@@ -2,63 +2,59 @@ import React from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {useState,useEffect} from "react";
-import { getcoms, getpubById } from "../../JS/actions/pub";
+import { useState, useEffect } from "react";
+import { addReservasion, getcoms, getpubById } from "../../JS/actions/pub";
 import CardComments from "../Commentaire/CardComments";
+import ListComments from "../Commentaire/ListComments";
+
 import LikeButton from "../Like";
 import "./SingelPub.css";
-const SingelPub = ({ match,user }) => {
+const SingelPub = ({ match, user }) => {
   const [showComments, setShowComments] = useState(false);
+  const [dateDebut, setDateDebut] = useState("");
+  const [dateFin, setDateFin] = useState("");
   const dispatch = useDispatch();
-const pub = useSelector(state => state.pubReducer.pub)
+  const pub = useSelector((state) => state.pubReducer.pub);
+
+  const loadcoms = useSelector((state) => state.pubReducer.loadcoms);
+  const comments = useSelector((state) => state.pubReducer.pub.comments);
+  const postedBy = useSelector((state) => state.pubReducer.pub.postedBy);
+  let same = postedBy === user._id
+
+  // const userId = user && user._id;
+  useEffect(
+    () => dispatch(getcoms()),
+
+    [dispatch]
+  );
   useEffect(() => {
     dispatch(getpubById(match.params.id));
-    dispatch(getcoms())
-  }, [dispatch,match.params.id]);
+  }, [dispatch, match.params.id]);
+
+  const handleReserve = (e) => {
+    e.preventDefault();
+    if ({ dateDebut, dateFin }) {
+      dispatch(addReservasion(pub._id, dateDebut, dateFin));
+    }
+  };
 
   console.log(pub);
 
-
   return (
-    <div className="singelPub">
-      <div className="C">
-        <div className="singel" style={{ margin: "2%" }}>
-          <img
-            className="singelIm"
-            variant="top"
-            src={pub.imageUrl}
-            alt="photos"
-          />
-          <div>
-            <h3>Titre de la publication : {pub.titre}</h3> 
-            <h5>Description : {pub.description}</h5>
-            <h4>prix par jour : {pub.prix}</h4>
-            <h6>Mise le : {pub.date}</h6>
-
-            <div className="form">
-              <h4>vous pouvez reserever par ici : </h4>
-              <Form>
-                <Col>
-                  <Form.Control type="date" placeholder="date debut " />
-                </Col>
-                <Col>
-                  <Form.Control type="date" placeholder="date fin" />
-                </Col>
-                <Link to="/Home">
-                  <Button variant="primary">Reserver</Button>
-                </Link>
-              </Form>
-            </div>
-            <br />
-            <br />
-            <Link to="/">
-              <Button variant="primary">GoBack Home</Button>
-            </Link>
-            <br />
-            <br />
-            <Link to="/EditPub">
-              <Button variant="primary">Edit Pub</Button>
-            </Link>
+    <div>
+      <div>
+        <div className="containe">
+          
+            <img className="images" src={pub.imageUrl} alt="imageURL" />
+          
+          <div className="product">
+            <p>Mise le : {pub.date}</p>
+            <h2>{pub.titre}</h2>
+            <h5>prix : {pub.prix}</h5>
+            <p className="desc">Description : {pub.description}</p>
+            <div className="buttons">
+             <div  className="likeC"><LikeButton pub={pub && pub} user={user && user} /></div> 
+              
             <div className="card-footer">
               <div className="comment-icon">
                 <img
@@ -66,14 +62,49 @@ const pub = useSelector(state => state.pubReducer.pub)
                   src="../img/icons/message1.svg"
                   alt="comment"
                 />
-                {/* <span>{pub.comments.length === 0 ? "no comments":pub.comments.length}</span>   */}
-                {/* <span>{pub.comments.length}</span> */}
+                <span>{comments.length && comments.length}</span>
               </div>
-              <LikeButton pub={pub&&pub} user={user&&user} />
             </div>
-            {showComments && <CardComments pub={pub&&pub} user={user&&user} />}
+            </div>
           </div>
         </div>
+      </div>
+      <div>
+        <div className="form">
+          <h4>vous pouvez reserever par ici : </h4>
+          <Form>
+            <Col>
+              <Form.Control
+                type="date"
+                placeholder="date debut "
+                onChange={(e) => setDateDebut(e.target.value)}
+              />
+            </Col>
+            <Col>
+              <Form.Control
+                type="date"
+                placeholder="date fin"
+                onChange={(e) => setDateFin(e.target.value)}
+              />
+            </Col>
+
+            <Button className="reserv" variant="primary" onSubmit={handleReserve}>
+              Reserver
+            </Button>
+          </Form>
+        </div>
+        <br />
+        <br /> 
+        {same &&
+          (  <Link to="/EditPub">
+            <Button className="ediit" variant="primary">Edit Pub</Button>
+          </Link>  ) }  
+        {showComments && (
+          <div className="comment-form">
+            <CardComments pub={pub && pub} />
+            <ListComments comments={comments} loadcoms={loadcoms} />
+          </div>
+        )}
       </div>
     </div>
   );

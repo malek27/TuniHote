@@ -1,14 +1,172 @@
-div .form{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 2% 0% 0% 14%;
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700");
+/* center container in the middle */
+html {
+  display: grid;
+  min-height: 100%;
 }
-.singelPub{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+body {
+  display: grid;
+  background: white;
+  font-family: "Lato", sans-serif, sans-serif;
+  text-transform: uppercase;
 }
-.singelIm{
-    width: 300px;
+.containe {
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  width: 769px;
+  height: 588px;
+  background: #f5f5f5;
+  box-shadow: 5px 5px 15px rgba(122, 102, 240, 0.363);
+  border-radius: 10px;
+}
+p {
+  font-size: 0.6em;
+  color: black;
+  letter-spacing: 1px;
+}
+h1,h5 {
+  font-size: 1.2em;
+  color:  black;
+  margin-top: -5px;
+}
+h2 {
+  color: black;
+  margin-top: -5px;
+}
+
+.slideshow-buttons {
+  top: 70%;
+  display: none;
+}
+.one,
+.two,
+.three,
+.four {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #e0c9cb;
+}
+.one {
+  left: 22%;
+}
+.two {
+  left: 27%;
+}
+.three {
+  left: 32%;
+}
+.four {
+  left: 37%;
+}
+.product {
+  position: absolute;
+  width: 43%;
+    height: 100%;
+    top: 16%;
+    left: 57%;
+}
+.desc {
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 17px;
+  color:  black;
+  font-size: 0.7em;
+  line-height: 1.6em;
+  margin-right: 12px;
+  text-align: justify;
+}
+button {
+  background: #cda9ac;
+  padding: 10px;
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  margin: -1px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #f5f5f5;
+  cursor: pointer;
+}
+button:hover {
+  background: #ba7e7e;
+  transition: all 0.4s ease-in-out;
+}
+.add {
+  width: 67%;
+}
+.like {
+  width: 22%;
+}
+.sizes {
+  display: grid;
+  color: #d9aab7;
+  grid-template-columns: repeat(auto-fill, 30px);
+  width: 60%;
+  grid-gap: 4px;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+.sizes:hover {
+  cursor: pointer;
+}
+.pick {
+  margin-top: 11px;
+  margin-bottom: 0;
+  margin-left: 20px;
+}
+.size {
+  padding: 9px;
+  border: 1px solid #e0c9cb;
+  font-size: 0.7em;
+  text-align: center;
+}
+.size:hover {
+  background: #ba7e7e;
+  color: #f5f5f5;
+  transition: all 0.4s ease-in-out;
+}
+.focus {
+  background: #ba7e7e;
+  color: #f5f5f5;
+}
+
+div .likeC {
+  margin-top: 8%;
+}
+div .buttons {
+  display: flex;
+  width: 48%;
+  margin-top: 34%;
+  margin-left: 56%;
+}
+.form{
+    margin: 5% 0% 0% 18%;
+}
+
+.col {
+    padding: 1%
+}
+.button .reserv{
+    margin-left: 4% !important;
+}
+
+.button .ediit{
+    margin-left: 3%;
+}
+.comment-form{
+    margin-left: 1%;
+    margin-top: 3%;
+}
+.images {
+  width: 56%;
+  margin: 7% 22% 0% -21%;
+  height: 485px;
+  border-radius: 7%;
+}
+.reserv{
+  margin-left: 5%;
 }
