@@ -9,11 +9,11 @@ const PubList = () => {
   const pubs = useSelector((state) => state.pubReducer.pubs);
 
   return (
-    <ul className="cards">
+    <ul className="cardss">
       {loadpub ? (
         <Spinner className="spinner" animation="border" variant="primary" />
       ) : (pubs&&pubs) === null || (pubs.length&&pubs.length === 0) ? (
-        <h2>Nothing to show !!</h2>
+        <h2>Pas de publications!!</h2>
       ) : (
         pubs.map((el) => <Pub key={el._id} pub={el} />)
       )}

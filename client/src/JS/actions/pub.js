@@ -9,14 +9,15 @@ import {
   UPDATE_LIKES,
   UPDATE_DISLIKES,
   GET_ALL_COMS,
-  RATE,
   LOAD_COMS,
   GET_ALL_RESERVATION,
   LOAD_RESERVATION,
-  GET_MY_PUB
+  GET_MY_PUB,
+  ACCPTER_R,
+  DECLINER_R
 } from "../const/pub";
 import axios from "axios";
-import { setAlert } from "./alert";
+
 
 // add pub
 
@@ -103,7 +104,7 @@ export const deletePubById = (id) => async (dispatch) => {
     },
   };
   try {
-    let result = await axios.deleteOne(`/pub/${id}`, options);
+    let result = await axios.delete(`/pub/${id}`, options);
     dispatch({ type: DELETE_PUB, payload: result });
   } catch (e) {
     dispatch({ type: FAIL_PUB, payload: e.message });
@@ -121,8 +122,9 @@ export const editPub = (id, pub, history) => async (dispatch) => {
   try {
     let result = await axios.put(`/pub/SingelPub/${id}`, pub, options);
     dispatch({ type: EDIT_PUB, payload: result.data });
-    // history.push(`/SingelPub/${id}`);
-    dispatch(getpubById(id));
+    
+    // dispatch(getpubById(id));
+    history.push(`/SingelPub/${id}`);
   } catch (e) {
     dispatch({ type: FAIL_PUB, payload: e.message });
   }
@@ -149,11 +151,11 @@ export const addComment = (pubid, text) => async (dispatch) => {
 };
 
 //get all coms
-export const getcoms = () => async (dispatch) => {
+export const getcoms = (id) => async (dispatch) => {
   const options = { headers: { authorization: localStorage.getItem("token") } };
   dispatch({ type: LOAD_COMS });
   try {
-    let result = await axios.get("/pub/comments", options);
+    let result = await axios.get(`/pub/comments/${id}`, options);
     dispatch({ type: GET_ALL_COMS, payload: result.data.response });
   } catch (e) {
     dispatch({ type: FAIL_PUB, payload: e.message });
@@ -198,7 +200,8 @@ export const addReservation = (pubid, dateDebut,dateFin) => async (dispatch) => 
   try {
     const res = await axios.post(`/pub/reserver/${pubid}`, { dateDebut,dateFin }, options);
     console.log("res reservation", res);
- 
+    // dispatch({ type: ADD_RESERVATION, payload: res.data });
+    // dispatch(getReservation());
     dispatch(getpubById(pubid));
 
     alert("Reservation Added", "success");
@@ -223,33 +226,65 @@ export const getReservation = () => async (dispatch) => {
 };
 
 //Rate
-export const addrate = (postId, formData) => async (dispatch) => {
-  const options = {
-    headers: {
-      authorization: localStorage.getItem("token"),
-    },
-  };
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  try {
-    const res = await axios.post(
-      `/pub/rate/${postId}`,
-      formData,
-      config,
-      options
-    );
-    dispatch({
-      type: RATE,
-      payload: res.data,
-    });
+// export const addrate = (postId, formData) => async (dispatch) => {
+//   const options = {
+//     headers: {
+//       authorization: localStorage.getItem("token"),
+//     },
+//   };
+//   const config = {
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   };
+//   try {
+//     const res = await axios.post(
+//       `/pub/rate/${postId}`,
+//       formData,
+//       config,
+//       options
+//     );
+//     dispatch({
+//       type: RATE,
+//       payload: res.data,
+//     });
 
-    dispatch(setAlert("Rate success", "warning"));
-  } catch (error) {
-    dispatch(
-      setAlert("Rating Failed or you already rated this post", "warning")
-    );
+//     dispatch(setAlert("Rate success", "warning"));
+//   } catch (error) {
+//     dispatch(
+//       setAlert("Rating Failed or you already rated this post", "warning")
+//     );
+//   }
+// };
+
+//accepter
+export const accepterR = (idR) => async (dispatch) => {
+  const options = { headers: { authorization: localStorage.getItem("token") } };
+  try {
+    const res = await axios.put(`/pub/accepter/${idR}`, "", options);
+    console.log("res accepter", res);
+    dispatch({ type: ACCPTER_R, payload: res.data });
+    alert("reservation accepter", "success");
+    dispatch(getReservation())
+  } catch (err) {
+    dispatch({
+      type: FAIL_PUB,
+    });
+  }
+};
+
+//decliner
+export const declinerR = (idR) => async (dispatch) => {
+  const options = { headers: { authorization: localStorage.getItem("token") } };
+  try {
+    const res = await axios.put(`/pub/decliner/${idR}`, "", options);
+    console.log("res accepter", res);
+    dispatch({ type: DECLINER_R, payload: res.data });
+    alert("reservation decliner", "success");
+    dispatch(getReservation())
+  } catch (err) {
+    dispatch({
+      type: FAIL_PUB,
+    });
   }
 };

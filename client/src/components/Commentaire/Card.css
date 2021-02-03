@@ -389,3 +389,8 @@
 .card-container .update-post .button-container button:nth-child(1) {
     background: red;
 }
+
+.comment-form  input{
+    margin-bottom: 3%;
+    padding: 1% 10% 1% 10%;
+}

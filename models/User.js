@@ -30,7 +30,7 @@ const userSchema = new Schema({
     type: String,
     default: "utilisateur"
   },
-  // mypubs: [{ type: Schema.Types.ObjectId, ref: "pub" }],
+
   isAdmin:{ type:Boolean, default:false, }
 });
 

@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-// import { UidContext } from "../components/AppContext";
-// import Popup from "reactjs-popup";
-// import "reactjs-popup/dist/index.css";
 import { useDispatch,useSelector} from "react-redux";
 import { likePost, unlikePost } from "../JS/actions/pub";
 
@@ -10,7 +7,6 @@ const LikeButton = ({ pub,user}) => {
   const userId=user&&user._id;
   
   const [liked, setLiked] = useState(false);
-  // const uid = useContext(UidContext);
   const dispatch = useDispatch();
 
   const like = () => {

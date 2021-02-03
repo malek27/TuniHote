@@ -1,4 +1,3 @@
-// import { Button } from "react-bootstrap";
 import React from "react";
 import { Link } from "react-router-dom";
 import { getpubById } from "../../JS/actions/pub";
@@ -10,7 +9,7 @@ const Pub = ({ pub }) => {
   const id = pub._id;
   return (
     <li className="cards__item">
-      <div className="card">
+      <div className="cardd">
         <div className="card__image" >
           <img src={pub.imageUrl} alt=""  />
         </div>

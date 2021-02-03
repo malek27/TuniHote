@@ -15,22 +15,25 @@ import {
   RATE,
   GET_ALL_RESERVATION,
   LOAD_RESERVATION,
-  GET_MY_PUB
+  GET_MY_PUB,
+  ADD_RESERVATION,
+  DECLINER_R,
+  ACCPTER_R
 } from "../const/pub";
 
 const initiState = {
   pubs: [],
-  mypubs:[],
+  mypubs: [],
   loadpub: true,
   loadcoms: true,
-  loadresrvs:true,
+  loadresrvs: true,
   errors: null,
   pub: {},
   isUpdated: false,
   comments: [],
   likes: [],
   dislikes: [],
-  reservations:[],
+  reservations: [],
 };
 
 export const pubReducer = (state = initiState, { type, payload }) => {
@@ -83,10 +86,28 @@ export const pubReducer = (state = initiState, { type, payload }) => {
       };
     case GET_ALL_COMS:
       return { ...state, loadcoms: false, comments: payload };
+    case ADD_RESERVATION:
+      return {
+        ...state,
+        reservation: [...state.reservation, payload.user],
+        loadresrvs: false,
+      };
     case GET_ALL_RESERVATION:
       return { ...state, loadresrvs: false, reservations: payload };
     case LOAD_RESERVATION:
       return { ...state, loadresrvs: true };
+      case ACCPTER_R:
+      return {
+        ...state,
+        reservations: [...state.reservations, payload],
+        loadresrvs: false,
+      };
+      case DECLINER_R:
+      return {
+        ...state,
+        reservations: [...state.reservations, payload],
+        loadresrvs: false,
+      };
     case RATE:
       return {
         ...state,

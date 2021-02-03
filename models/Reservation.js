@@ -8,7 +8,8 @@ const ReservationSchema = new Schema({
       pub: { type: Schema.Types.ObjectId, ref: "pub" },
       dateDebut: { type: String, default: moment().format("llll") },
       dateFin: { type: String, default: moment().format("llll") },
-      date: { type: String, default: moment().format("llll") }
+      date: { type: String, default: moment().format("llll") },
+      reponse :{type: String,default:"en attente"}
 
        });
     

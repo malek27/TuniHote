@@ -1,29 +1,28 @@
 import { Switch, Route, useHistory } from "react-router-dom";
 import SignUp from "./components/signUp/SignUp";
-import SingelPub from "./components/pages/SingelPub";
+import SingelPub from "./components/pages/SingelPub/SingelPub";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import RoleRoute from "./components/routes/RoleRoute";
 import Admin from "./components/routes/Admin";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Nave from "./components/nav/nav";
-import AboutUs from "./components/pages/AboutUs";
+import AboutUs from "./components/pages/About/AboutUs";
 import Error from "./components/pages/Error";
 import AddPub from "./components/AddPub/AddPub";
 import EditPub from "./components/Edit/EditPub";
 import EditUser from "./components/Edit/EditUser";
-import ReservationM from "./components/ReservationM";
-import ReservationU from "./components/ReservationU";
+import ReservationM from "./components/Reservations/ReservationM";
 import Home from "./components/pages/Home";
 import ListeUser from "./components/ListeUser";
 import ListePub from "./components/ListePub";
 import Utilisateur from "./components/utilisateur/Utilisateur";
 import { current } from "./JS/actions/user";
-import Intro from "./components/pages/Intro"
-
+import Intro from "./components/pages/Intro/Intro"
+import Mypubs from "./components/My pub/Mypubs";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Mypubs from "./components/Mypubs";
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 
 function App() {
@@ -70,12 +69,10 @@ function App() {
           <Admin path="/ListePub" component={ListePub} />
           <RoleRoute path="/reservationM" component={ReservationM} />
           <RoleRoute path="/mypubs" component={Mypubs} />
-          <PrivateRoute path="/reservationU" component={ReservationU} />
           <PrivateRoute path="/SingelPub/:id" 
           render={(props)=> <SingelPub pub={pub&&pub} user={user&&user}  {...props} />} /> 
-          <Route path="/EditPub/:id" component={EditPub} />
+          <Route path="/EditPub" component={EditPub} />
           <Route path="/EditUser" component={EditUser} />
-          {/* <Route path="/forget/password" component={forgetPassword} /> */}
           <Route path="/search/:searched" component={Home} />
           <Route path="/*" component={Error} />
         </Switch>
@@ -84,11 +81,13 @@ function App() {
       <br/>
       <br/>
       <footer className="blockquote-footer">
-        Developed by <cite title="Source Title">Malek Marzouki ©®™</cite>
+        Developper par : <cite title="Source Title">Malek Marzouki ©®™</cite>
         <br/>
-        contact us  - email : TuniHoteM@gmail.com
+        contactez-nous par : 
         <br/>
-                   - phone : +21623091754
+         - email : TuniHoteM@gmail.com
+        <br/>
+                   - telephone : +21623091754
       </footer>
     </div>
   );

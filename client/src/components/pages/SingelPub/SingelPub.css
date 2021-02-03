@@ -140,11 +140,22 @@ div .likeC {
 div .buttons {
   display: flex;
   width: 48%;
-  margin-top: 34%;
+  margin-top: 2%;
   margin-left: 56%;
+  
 }
 .form{
     margin: 5% 0% 0% 18%;
+}
+
+.form h4 {
+  margin: 2% 21% 0% 0% !important;
+}
+
+.col {
+  
+  max-width: 60% !important;
+  margin-left: 24%;
 }
 
 .col {
@@ -168,5 +179,12 @@ div .buttons {
   border-radius: 7%;
 }
 .reserv{
-  margin-left: 5%;
+  margin-left: 7% !important;
+}
+
+.Bedit  {
+  margin: 3% 0% 0% 1% !important
+}
+div h4 {
+  margin: 2% 0% 0% 0% !important;
 }

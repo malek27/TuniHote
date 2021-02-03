@@ -26,13 +26,15 @@ export const userReducer = (state = initiState, { type, payload }) => {
   switch (type) {
     case REGISTER_USER:
       localStorage.setItem("token", payload.token);
-      localStorage.setItem("role", payload.user.role);
       localStorage.setItem("isAdmin", payload.user.isAdmin);
+      localStorage.setItem("role", payload.user.role);
+      
       return { ...state, loadUser: false, user: payload.user, isAuth: true };
     case LOGIN_USER:
       localStorage.setItem("token", payload.token);
-      localStorage.setItem("role", payload.user.role);
       localStorage.setItem("isAdmin", payload.user.isAdmin);
+      localStorage.setItem("role", payload.user.role);
+      
 
       return { ...state, loadUser: false, user: payload.user, isAuth: true };
     case LOAD_USER:
@@ -43,18 +45,18 @@ export const userReducer = (state = initiState, { type, payload }) => {
       return { ...state, loadUser: false, errors: payload };
     case LOGOUT_USER:
       localStorage.removeItem("token");
-      localStorage.removeItem("role");
       localStorage.removeItem("isAdmin");
+      localStorage.removeItem("role");
+      
       return { user: null, loadUser: false, errors: null, isAuth: false };
     case GET_ALL_USER:
       return { ...state, loadUser: false, users: payload };
     case GET_USER:
       return { ...state, loadUser: false, user: payload };
     case DELETE_USER:
-      localStorage.removeItem("token");
-      localStorage.removeItem("role");
-      localStorage.removeItem("isAdmin");
-      return { ...state,user:payload, loadUser: false, isAuth: false };
+      
+     
+      return { ...state,user:payload, loadUser: false};
     case EDIT_USER:
       return { ...state, loadUser: false, user: payload.user , isUpdated:true };
 

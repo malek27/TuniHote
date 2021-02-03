@@ -3,7 +3,7 @@ import "./Utilisateur.css";
 import { useSelector,useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {deleteUserById} from "../../JS/actions/user"
-import { editUser } from "../../JS/actions/user";
+
 
 
 const Utilisateur = () => {
@@ -51,7 +51,7 @@ const Utilisateur = () => {
                 className="profile-edit-btn"
                 name="btnAddMore"
                 value="Edit Profile"
-                onClick={() => dispatch(editUser(id))}
+
               /></Link>
               <Link to="/Home"><input
                 type="submit"

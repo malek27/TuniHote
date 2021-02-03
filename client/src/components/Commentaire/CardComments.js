@@ -22,6 +22,7 @@ const CardComments = ({ pub}) => {
   return (
     <form action="" onSubmit={handleComment} className="comment-form">
         <input
+        className="message"
           type="text"
           name="text"
           onChange={(e) => setText(e.target.value)}

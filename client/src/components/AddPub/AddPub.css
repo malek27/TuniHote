@@ -7,7 +7,7 @@ body {
 }
 
 .total{
-  margin-left: 50px;
+  margin-left: -32px;
 }
 .adding-box {
   width: 100%;
@@ -199,7 +199,7 @@ a {
 
 .card {
   width: 500px;
-  left: 100px !important;
+  left: 211px !important;
   margin-top: 30px;
 }
 
@@ -243,7 +243,7 @@ h6{ color:rgb(247, 80, 3);}
 } */
 
 button.btn.btn-primary {
-  margin:3% 0% 0% 8%
+  margin:3% 0% 0% 11%
 }
 .custom-file{
   width: 73% !important;

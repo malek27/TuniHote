@@ -1,42 +1,32 @@
 import React from "react";
 import { editPub } from "../../JS/actions/pub";
 import { Link } from "react-router-dom";
-import { useState} from "react"; //useEffect 
+import { useState,useEffect } from "react"; //
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-// import {getpubById} from "../../JS/actions/pub"
+import {getpubById} from "../../JS/actions/pub"
 import "./EditPub.css";
 
 const EditPub = () => {
   const [titre, setTitre] = useState("");
   const [description, setDescription] = useState("");
   const [prix, setPrix] = useState("");
-  const dispatch = useDispatch();
+ 
   const pub = useSelector((state) => state.pubReducer.pub);
   const id = pub && pub._id;
+  const dispatch = useDispatch();
   const history = useHistory();
-  // useEffect(() => {
-  //   dispatch(getpubById(pub._id))
-  // }, [])
+  useEffect(() => {
+    dispatch(getpubById(pub._id))
+  }, [dispatch,pub._id])
   return (
-    <div>
-      <div className="row">
-        <div className="total">
-          <div className="card">
-            <div className="adding">
-              <div className="adding-snip">
-                <input
-                  id="tab-2"
-                  type="radio"
-                  name="tab"
-                  className="sign-up"
-                  defaultChecked
-                />
-                <label htmlFor="tab-2" className="tab">
+    
+              <div className="edit-pub">
+                <h3>
                   Publication
-                </label>
+                </h3>
 
-                <div className="adding-space">
+                <div className="ediit">
                   <div className="group">
                     <label htmlFor="user" className="label">
                       Titre
@@ -74,7 +64,7 @@ const EditPub = () => {
                     />
                   </div>
                   <div className="group">
-                    <Link to="/SingelPub">
+                    <Link to={`/SingelPub/${pub._id}`}>
                       <button
                         type="submit"
                         className="button"
@@ -99,11 +89,6 @@ const EditPub = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 };
 

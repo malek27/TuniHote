@@ -70,7 +70,7 @@ const SignUp = () => {
                       defaultChecked
                     />
                     <label htmlFor="check">
-                      <span className="icon" /> Keep me Signed in
+                      <span className="icon" /> rester connecter
                     </label>
                   </div>
                   <div className="group">
@@ -85,7 +85,7 @@ const SignUp = () => {
                   </div>
                   <div className="hr" />
                   <div className="foot">
-                   <Link to="/forget/password"> <a href="/">Forgot Password?</a></Link>
+                   <Link to="/forget/password">Mot de passe oublier ?</Link>
                   </div>
                 </div>
                 <div className="sign-up-form">

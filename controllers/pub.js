@@ -68,7 +68,7 @@ exports.getpubs = async (req, res) => {
 //Get a pub by id
 
 exports.getpubById = async (req, res) => {
-  console.log("bject");
+  // console.log("bject");
   try {
     const result = await Pub.findOne({ _id: req.params.id })
       .populate("comments")
@@ -167,33 +167,16 @@ exports.addCom = async (req, res) => {
 // get all com
 exports.getcoms = async (req, res) => {
   try {
-    let result = await Comment.find().sort({ date: -1 }).populate("user");
+    // const pub = await Pub.findOne({ _id: req.params.idpost })
+    let result = await Comment.find({pub:req.params.idpost}).sort({ date: -1 }).populate("user");
     res
       .status(200)
       .send({ response: result, message: "Getting comments successfully" });
   } catch (error) {
-    res
-      .status(500)
-      .send({ message: "les commentaires nont pas etait afficher" });
+    console.error("comments",error.message);
+    res.status(500).send("Server Error");
   }
 };
-//Get a coms by id
-
-// exports.getcomsById = async (req, res) => {
-//   try {
-//     const result = await Comment.findOne({ _id: req.params.id })
-//       .populate("pub")
-      
-
-//     res.status(200).send({
-//       response: result,
-//       message: "Got the desired comments successfullY !",
-//     });
-//   } catch (e) {
-//     res.status(500).send({ message: "there is no comments with this id !" });
-//   }
-// };
-
 
 
 //like
@@ -249,49 +232,49 @@ exports.unlike = async (req, res) => {
 
 // rating
 
-exports.ratingPub = async (req, res) => {
-  try {
-    const pub = await Pub.findById(req.params.id);
-    const user = await User.findById(req.user.id).select("-password");
-    if (
-      pub.rate.filter((rate) => rate.user.toString() === req.user.id).length > 0
-    ) {
-      return res.status(400).json({ msg: "Post already rated" });
-    }
+// exports.ratingPub = async (req, res) => {
+//   try {
+//     const pub = await Pub.findById(req.params.id);
+//     const user = await User.findById(req.user.id).select("-password");
+//     if (
+//       pub.rate.filter((rate) => rate.user.toString() === req.user.id).length > 0
+//     ) {
+//       return res.status(400).json({ msg: "Post already rated" });
+//     }
 
-    const newrate = {
-      rating: req.body.rating,
-      user: req.user.id,
-    };
-    pub.rate.unshift(newrate);
-    console.log(pub);
-    // await pub.save();
-    let sum = 0;
-    pub.rate.forEach((r) => {
-      sum = sum + r.rating;
-    });
-    pub.avg = sum / pub.rate.length;
+//     const newrate = {
+//       rating: req.body.rating,
+//       user: req.user.id,
+//     };
+//     pub.rate.unshift(newrate);
+//     console.log(pub);
+//     // await pub.save();
+//     let sum = 0;
+//     pub.rate.forEach((r) => {
+//       sum = sum + r.rating;
+//     });
+//     pub.avg = sum / pub.rate.length;
 
-    console.log(pub.avg);
-    await pub.save();
-    res.json(pub.rate);
-  } catch (error) {
-    if (error.kind === "ObjectId") {
-      return res.status(404).json({ msg: "Pub not found" });
-    }
-    res.status(500).send("server Error");
-  }
-};
+//     console.log(pub.avg);
+//     await pub.save();
+//     res.json(pub.rate);
+//   } catch (error) {
+//     if (error.kind === "ObjectId") {
+//       return res.status(404).json({ msg: "Pub not found" });
+//     }
+//     res.status(500).send("server Error");
+//   }
+// };
 
-cron.schedule("* * * * *", async function () {
-  // console.log("run every 60 sec");
-  const pub = await Pub.find();
-  pub.forEach((e) => {
-    if (e.avg < 3) {
-      e.remove();
-    }
-  });
-});
+// cron.schedule("* * * * *", async function () {
+//   // console.log("run every 60 sec");
+//   const pub = await Pub.find();
+//   pub.forEach((e) => {
+//     if (e.avg < 3) {
+//       e.remove();
+//     }
+//   });
+// });
 
 //******************************************************
 //add reservation
@@ -341,39 +324,39 @@ exports.getreservations = async (req, res) => {
 
 
 //reservation mail
-exports.sendMail= async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id);
-    const pub = await Pub.findById({ _id: req.params.idpost })
+// exports.sendMail= async (req, res) => {
+//   try {
+//     const user = await User.findById(req.user.id);
+//     const pub = await Pub.findById({ _id: req.params.idpost })
   
-// Step 1
-let transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-      user: process.env.EMAIL_ADDRESS ,
-      pass: process.env.EMAIL_PASSWORD 
-}});
+// // Step 1
+// let transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//       user: process.env.EMAIL_ADDRESS ,
+//       pass: process.env.EMAIL_PASSWORD 
+// }});
 
-// Step 2
-let mailOptions = {
-  from: process.env.EMAIL_FROM, 
-  to: `${pub.postedBy.email}`,
-  subject: 'reservation',
-  text: `cette personne ${user.email} veut faire une reservation concernant cette publication ${pub.titre}
-  veuillez vous connecter a votre plateforme pour confirmer/decliner la demande`  
-};
+// // Step 2
+// let mailOptions = {
+//   from: process.env.EMAIL_FROM, 
+//   to: `${pub.postedBy.email}`,
+//   subject: 'reservation',
+//   text: `cette personne ${user.email} veut faire une reservation concernant cette publication ${pub.titre}
+//   veuillez vous connecter a votre plateforme pour confirmer/decliner la demande`  
+// };
 
-// Step 3
-transporter.sendMail(mailOptions, (err, data) => {
-  if (err) {
-      return log('Error occurs');
-  }
-  return log('Email sent!!!');
-})} catch (err) {
-  console.error("sendMail",err.message);
-  res.status(500).send("Server Error");
-}
-};
+// // Step 3
+// transporter.sendMail(mailOptions, (err, data) => {
+//   if (err) {
+//       return log('Error occurs');
+//   }
+//   return log('Email sent!!!');
+// })} catch (err) {
+//   console.error("sendMail",err.message);
+//   res.status(500).send("Server Error");
+// }
+// };
 
 
 
@@ -387,3 +370,36 @@ exports.Mypubs = async (req,res)=>{
       console.log(err)
   })
 }
+
+
+exports.accepter = async (req,res) =>{
+
+  try {
+ 
+ let result=  await Reservation.updateOne(
+     { _id: req.params.idR },
+     { reponse: "true" } 
+   );
+   let x=await Reservation.findById(req.params.idR)
+  return res.status(200).send(x);
+  } catch (e) {
+    console.error("accepter",e.message);
+    res.status(500).send("Server Error");
+  }
+};
+
+exports.decliner = async (req,res) =>{
+
+  try {
+    let result=  await Reservation.updateOne(
+      { _id: req.params.idR },
+      { reponse: "false" } 
+    );
+    let x=await Reservation.findById(req.params.idR)
+   return res.status(200).send(x);
+   } catch (e) {
+     console.error("decliner",e.message);
+     res.status(500).send("Server Error");
+   }
+ };
+

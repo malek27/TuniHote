@@ -9,7 +9,7 @@ import {
 import { logout } from "../../JS/actions/user";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { filterPub, getpubs } from "../../JS/actions/pub";
+import { filterPub } from "../../JS/actions/pub";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./nav.css";
@@ -22,31 +22,40 @@ const Nave = ({ history }) => {
     dispatch(filterPub(titre));
   };
   useEffect(() => {
-    if (titre === "") {
-      dispatch(getpubs());
-    } else {
+    if (titre !== "") {
       dispatch(filterPub(titre));
     }
   }, [dispatch, titre]);
-  const RoleM = localStorage.getItem("role", "maison d'hôte");
-  const RoleU = localStorage.getItem("role", "utilisateur");
-  const isAuth = localStorage.getItem("token");
-  const isAdmin = localStorage.getItem("isAdmin","true");
-  return isAuth && isAdmin ? (
+ 
+  // localStorage.getItem('role')==='utilisateur'
+  // localStorage.getItem('role')==="maison d'hôte"
+  // localStorage.getItem("token")
+  // localStorage.getItem("isAdmin")==="true"
+  
+   
+  return (localStorage.getItem("token") && localStorage.getItem("isAdmin")==="true") ? (
     <div className="all">
       <Navbar className="navbar" expand="xl" bg="light" variant="light">
         <Navbar.Brand href="/">TuniHotes</Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link href="/Home">Home</Nav.Link>
-          <Nav.Link href="/AboutUs">About Us</Nav.Link>
+          <Nav.Link href="/Home">Acceuil</Nav.Link>
+          <Nav.Link href="/AboutUs">contactez-nous</Nav.Link>
           <NavDropdown title="Option" id="basic-nav-dropdown">
             <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
-            <NavDropdown.Item href="/addPub">Add pub</NavDropdown.Item>
-            <NavDropdown.Item href="/mypubs">My pub</NavDropdown.Item>
+            <NavDropdown.Item href="/addPub">
+              Ajout publication
+            </NavDropdown.Item>
+            <NavDropdown.Item href="/mypubs">Mes publications</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="/reservationM">Reservation</NavDropdown.Item>
-            <NavDropdown.Item href="/ListeUser">Liste user</NavDropdown.Item>
-            <NavDropdown.Item href="/ListePub">Liste pub</NavDropdown.Item>
+            {/* <NavDropdown.Item href="/reservationM">
+              Reservations
+            </NavDropdown.Item> */}
+            <NavDropdown.Item href="/ListeUser">
+              Liste utilisateur
+            </NavDropdown.Item>
+            <NavDropdown.Item href="/ListePub">
+              Liste publication
+            </NavDropdown.Item>
           </NavDropdown>
           <Nav.Link
             onClick={() => {
@@ -54,13 +63,13 @@ const Nave = ({ history }) => {
               history.push("/SignUp");
             }}
           >
-            Logout
+            Deconnection
           </Nav.Link>
         </Nav>
         <Form inline onSubmit={handleSubmit}>
           <FormControl
             type="text"
-            placeholder="Search"
+            placeholder="Recherche"
             className="mr-sm-2"
             onChange={(e) => setTitre(e.target.value)}
           />
@@ -70,24 +79,28 @@ const Nave = ({ history }) => {
               dispatch(filterPub(titre));
             }}
           >
-            Search
+            Recherche
           </Button>
         </Form>
       </Navbar>
     </div>
-  ) : isAuth && RoleM ? (
+  ) : (localStorage.getItem("token") && localStorage.getItem('role')==="maison d'hôte" )? (
     <div className="all">
       <Navbar className="navbar" expand="xl" bg="light" variant="light">
         <Navbar.Brand href="/">TuniHotes</Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link href="/Home">Home</Nav.Link>
-          <Nav.Link href="/AboutUs">About Us</Nav.Link>
+          <Nav.Link href="/Home">Acceuil</Nav.Link>
+          <Nav.Link href="/AboutUs">contactez-nous</Nav.Link>
           <NavDropdown title="Option" id="basic-nav-dropdown">
             <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
-            <NavDropdown.Item href="/addPub">Add pub</NavDropdown.Item>
-            <NavDropdown.Item href="/mypubs">My pub</NavDropdown.Item>
+            <NavDropdown.Item href="/addPub">
+              Ajout publication
+            </NavDropdown.Item>
+            <NavDropdown.Item href="/mypubs">Mes publications</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="/reservationM">Reservation</NavDropdown.Item>
+            <NavDropdown.Item href="/reservationM">
+              Reservations
+            </NavDropdown.Item>
           </NavDropdown>
           <Nav.Link
             onClick={() => {
@@ -95,13 +108,13 @@ const Nave = ({ history }) => {
               history.push("/SignUp");
             }}
           >
-            Logout
+            Deconnection
           </Nav.Link>
         </Nav>
         <Form inline onSubmit={handleSubmit}>
           <FormControl
             type="text"
-            placeholder="Search"
+            placeholder="Recherche"
             className="mr-sm-2"
             onChange={(e) => setTitre(e.target.value)}
           />
@@ -111,36 +124,37 @@ const Nave = ({ history }) => {
               dispatch(filterPub(titre));
             }}
           >
-            Search
+            Recherche
           </Button>
         </Form>
       </Navbar>
     </div>
-  ) : isAuth && RoleU ? (
+  ) : (localStorage.getItem("token") && localStorage.getItem('role')==='utilisateur') ? (
     <div className="all">
       <Navbar className="navbar" expand="xl" bg="light" variant="light">
         <Navbar.Brand href="/">TuniHotes</Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link href="/Home">Home</Nav.Link>
-          <Nav.Link href="/AboutUs">About Us</Nav.Link>
+          <Nav.Link href="/Home">Acceuil</Nav.Link>
+          <Nav.Link href="/AboutUs">contactez-nous</Nav.Link>
           <NavDropdown title="Option" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
-          <NavDropdown.Item href="/reservationU">Reservation</NavDropdown.Item>
+            <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
+            <NavDropdown.Item href="/reservationM">
+              Reservations
+            </NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link href="/SignUp">Sing Up</Nav.Link>
           <Nav.Link
             onClick={() => {
               dispatch(logout());
               history.push("/SignUp");
             }}
           >
-            Logout
+            Deconnection
           </Nav.Link>
         </Nav>
         <Form inline onSubmit={handleSubmit}>
           <FormControl
             type="text"
-            placeholder="Search"
+            placeholder="Recherche"
             className="mr-sm-2"
             onChange={(e) => setTitre(e.target.value)}
           />
@@ -150,25 +164,25 @@ const Nave = ({ history }) => {
               dispatch(filterPub(titre));
             }}
           >
-            Search
+            Recherche
           </Button>
         </Form>
       </Navbar>
     </div>
-  ) : 
-    
-      (<Navbar className="navbar" expand="Xl" bg="light" variant="light">
+  ) : (
+    <div className="all">
+      <Navbar className="navbar" expand="lg" bg="light" variant="light">
         <Navbar.Brand href="/">TuniHotes</Navbar.Brand>
 
         <Nav className="mr-auto">
-          <Nav.Link href="/Home">Home</Nav.Link>
-          <Nav.Link href="/AboutUs">About Us</Nav.Link>
-          <Nav.Link href="/SignUp">Sing Up</Nav.Link>
+          <Nav.Link href="/Home">Acceuil</Nav.Link>
+          <Nav.Link href="/AboutUs">contactez-nous</Nav.Link>
+          <Nav.Link href="/SignUp">Connection</Nav.Link>
         </Nav>
         <Form inline onSubmit={handleSubmit}>
           <FormControl
             type="text"
-            placeholder="Search"
+            placeholder="Recherche"
             className="mr-sm-2"
             onChange={(e) => setTitre(e.target.value)}
           />
@@ -178,11 +192,12 @@ const Nave = ({ history }) => {
               dispatch(filterPub(titre));
             }}
           >
-            Search
+            Recherche
           </Button>
         </Form>
-      </Navbar>)
-    
-          };
+      </Navbar>
+    </div>
+  );
+};
 
 export default Nave;

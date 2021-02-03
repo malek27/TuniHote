@@ -6,14 +6,14 @@ const Itro = () => {
     <div>
       <div className="container">
         <div className="item">
-          <h3>Welcome home</h3>
+          <h2>Bienvenue chez vous</h2>
           <br/>
           <h1>TuniHotes</h1>
           <br/>
           <p>
-            des maisons d'hôtes à porter de mains 
+            Des maisons d'hôtes à porter de mains 
           </p>
-         <Link to='/AboutUs'><button className="btn btn-primary" > Find Out More</button> </Link>
+         <Link to='/AboutUs'><button className="btn btn-primary" >En savoir plus</button> </Link>
          
         </div>
       </div>

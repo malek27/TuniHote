@@ -1,4 +1,4 @@
-div .cardss {
+div .cards {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
@@ -6,4 +6,9 @@ div .cardss {
     padding: 0;
     justify-content: center;
   }
-  
+ 
+
+  h3{
+    margin-left: 3%;
+    margin-top: 10%;
+  }

@@ -4,8 +4,6 @@ const {
   loginRules,
   registerRules,
   validation,
-  forgotPasswordValidator,
-    resetPasswordValidator
 } = require("../middleware/validator");
 
 const isAuth = require("../middleware/passport");

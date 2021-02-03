@@ -3,12 +3,11 @@ import { Button, Col, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { addReservation, getcoms, getpubById } from "../../JS/actions/pub";
-import CardComments from "../Commentaire/CardComments";
-import ListComments from "../Commentaire/ListComments";
-
-import LikeButton from "../Like";
+import { addReservation, getcoms, getpubById } from "../../../JS/actions/pub";
+import CardComments from "../../Commentaire/CardComments";
+import LikeButton from "../../Like";
 import "./SingelPub.css";
+import Com from "../../Commentaire/Com";
 const SingelPub = ({ match, user }) => {
   const [showComments, setShowComments] = useState(false);
   const [dateDebut, setDateDebut] = useState("");
@@ -16,16 +15,20 @@ const SingelPub = ({ match, user }) => {
   const dispatch = useDispatch();
   const pub = useSelector((state) => state.pubReducer.pub);
 
-  const loadcoms = useSelector((state) => state.pubReducer.loadcoms);
-  const comments = useSelector((state) => state.pubReducer.pub.comments);
+
+
+
   const postedBy = useSelector((state) => state.pubReducer.pub.postedBy);
+  // const comments = useSelector((state) => state.pubReducer.pub.comments);
+
   let same = postedBy === user._id
+  
+ 
 
-  // const userId = user && user._id;
   useEffect(
-    () => dispatch(getcoms()),
+    () => dispatch(getcoms(match.params.id)),
 
-    [dispatch]
+    [dispatch,match.params.id]
   );
   useEffect(() => {
     dispatch(getpubById(match.params.id));
@@ -33,9 +36,12 @@ const SingelPub = ({ match, user }) => {
 
   const handleReserve = (e) => {
     e.preventDefault();
-    if ({ dateDebut, dateFin }) {
+    if (dateDebut&& dateFin) {
       dispatch(addReservation(pub._id, dateDebut, dateFin));
+      setDateDebut("")
+      setDateFin("")
     }
+   else alert("you should enter the date")
   };
 
   console.log(pub);
@@ -62,7 +68,7 @@ const SingelPub = ({ match, user }) => {
                   src="../img/icons/message1.svg"
                   alt="comment"
                 />
-                <span>{comments.length && comments.length}</span>
+                {/* <span>{comments.length && comments.length}</span> */}
               </div>
             </div>
             </div>
@@ -72,11 +78,12 @@ const SingelPub = ({ match, user }) => {
       <div>
         <div className="form">
           <h4>vous pouvez reserever par ici : </h4>
-          <Form>
-            <Col>
+          <form >
+          <Col>
               <Form.Control
                 type="date"
                 placeholder="date debut "
+                value={dateDebut}
                 onChange={(e) => setDateDebut(e.target.value)}
               />
             </Col>
@@ -84,25 +91,26 @@ const SingelPub = ({ match, user }) => {
               <Form.Control
                 type="date"
                 placeholder="date fin"
+                value={dateFin}
                 onChange={(e) => setDateFin(e.target.value)}
               />
             </Col>
 
-            <Button className="reserv" variant="primary" onSubmit={handleReserve}>
+            <button className="reserv" variant="primary" onClick={handleReserve}>
               Reserver
-            </Button>
-          </Form>
+            </button>
+          </form>
         </div>
         <br />
         <br /> 
         {same &&
           (  <Link to="/EditPub">
-            <Button className="ediit" variant="primary">Edit Pub</Button>
-          </Link>  ) }  
+            <Button className="Bedit" variant="primary" >Edit Pub</Button>
+          </Link>  ) } 
         {showComments && (
           <div className="comment-form">
             <CardComments pub={pub && pub} />
-            <ListComments comments={comments} loadcoms={loadcoms} />
+            <Com />
           </div>
         )}
       </div>

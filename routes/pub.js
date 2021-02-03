@@ -3,7 +3,6 @@ const controllers = require("../controllers/pub");
 const {
     pubRules,
     validation,
-    addComtValidator
 } = require("../middleware/validator");
 const isAuth = require("../middleware/passport");
 
@@ -49,24 +48,27 @@ router.get('/search/:region', controllers.searchPub);
 //************************Comment*************************
 
 router.post("/comment/:idpost" ,isAuth(),controllers.addCom);
-router.get("/comments",isAuth(), controllers.getcoms );
-// router.put("/comment/:id", isAuth(), ,checkObjectId,controllers.editCom);
-// router.delete("/comment/:id", isAuth(), ,checkObjectId,controllers.deleteCom);
+router.get("/comments/:idpost",isAuth(), controllers.getcoms );
+
 
 
 //*************************Like************************
 
-// function(req, res){}
 
 router.put("/unlike/:idpost", isAuth(), controllers.unlike);
 router.put("/like/:idpost", isAuth(),  controllers.like)
 
-//*************************Rata************************
 
-// router.post('/rate/:id' , isAuth(), controllers.ratingPub);
-//*************************sendMail************************
-router.post("/Mailreserver/:idpost",isAuth(), controllers.sendMail );
+//*************************reservation************************
+
 router.post("/reserver/:idpost",isAuth(), controllers.addreservation );
 router.get("/reservations",isAuth(), controllers.getreservations );
 router.get('/mypubs',isAuth(),controllers.Mypubs);
+
+router.put("/accepter/:idR", isAuth(),  controllers.accepter)
+router.put("/decliner/:idR", isAuth(),  controllers.decliner)
+
+
+
+
 module.exports = router;

@@ -1,28 +1,31 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { editUser } from "../../JS/actions/user";
+import { editUser, getuser } from "../../JS/actions/user";
 import { Link } from "react-router-dom";
 import "./EditUser.css";
 
 const EditUser = () => {
+  const dispatch = useDispatch();
   const [nom, setNom] = useState("");
   const [prenom, setPrenom] = useState("");
   const [email, setEmail] = useState("");
   const [adresse, setAdresse] = useState("");
   const [cin, setCin] = useState("");
   const [numero, setNumero] = useState("");
+
   const user = useSelector((state) => state.userReducer.user);
   const id = user && user._id;
-  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getuser(user._id))
+  }, [dispatch,user._id])
+ 
   const history = useHistory();
   return (
     <div className="edit">
-    
-      <div>
-        <div>
-          <div>
+          <div className="edit-box"></div>
+          <div className="edit-form">
             <div className="groups">
             <h3>Edit user</h3>
             <br/>
@@ -100,7 +103,7 @@ const EditUser = () => {
                 />
                 <br/>
                 <br/>
-                <Link to="/Profile" >
+                <Link to="/Home" >
                   <input
                     type="submit"
                     className="button"
@@ -126,8 +129,6 @@ const EditUser = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
   );
 };
 

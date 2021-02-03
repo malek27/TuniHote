@@ -47,13 +47,15 @@ img {
     height: 15%;
  }
 }
-.card {
+.cardd {
   background-color: white;
   border-radius: 0.25rem;
   box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  max-height: 500px;
+  min-height: 500px;
 }
 .card:hover .card__image {
   filter: contrast(100%);
@@ -74,6 +76,7 @@ img {
   overflow: hidden;
   position: relative;
   transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
+  max-height: 208px;
 }
 .card__image::before {
   /* content: ""; */

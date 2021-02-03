@@ -72,7 +72,6 @@ const ForgetPassword = ({history}) => {
         <div className='flex-1 bg-indigo-100 text-center hidden lg:flex'>
           <div
             className='m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat'
-            // style={{ backgroundImage: `url(${authSvg})` }}
           ></div>
         </div>
       </div>

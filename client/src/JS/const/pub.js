@@ -20,4 +20,7 @@ export const UPDATE_LIKES = 'UPDATE_LIKES';
  //reserv
  export const LOAD_RESERVATION = "LOAD_RESERVATION";
  export const GET_ALL_RESERVATION = "GET_ALL_RESERVATION";
+ export const ADD_RESERVATION = "ADD_RESERVATION";
+ export const DECLINER_R = "DECLINER_R";
+ export const ACCPTER_R = "ACCPTER_R";
 

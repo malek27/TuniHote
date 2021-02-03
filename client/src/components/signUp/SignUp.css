@@ -6,6 +6,9 @@ body {
   font: 600 16px/18px "Open Sans", sans-serif;
 }
 
+
+
+div .login-box {margin-left: 18%;}
 .login-box {
   width: 100%;
   margin: auto;
@@ -216,4 +219,8 @@ div h4 {
 
  button.btn.btn-primary {
   margin: 7% 0% 0% 0%;
+}
+
+.row{
+  margin-left: 57px !important;
 }
