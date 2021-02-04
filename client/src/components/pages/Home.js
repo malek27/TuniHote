@@ -14,7 +14,7 @@ const Home = ({ loadpub, pubs }) => {
   return (
     <div>
       <h1>Bienvenue à TuniHotes</h1>
-      <p>Découvrez nos différent choix de maisons d'hôtes</p>
+      <p>Découvrez nos différents choix de maisons d'hôtes</p>
       <PubList pubs={pubs} loadpub={loadpub} />
     </div>
   );
