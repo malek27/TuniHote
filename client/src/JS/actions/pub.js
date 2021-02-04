@@ -32,6 +32,7 @@ export const registerPub = (pub, userId, history) => async (dispatch) => {
     const result = await axios.post("/pub/register", pub, options);
     dispatch({ type: GET_ALL_PUB, payload: result.data.response });
     history.push("/Home");
+    dispatch(getpubs())
   } catch (error) {
     console.log(error);
     // const { errors } = error.response.data;

@@ -3,7 +3,7 @@ import { Button, Col, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { addReservation, getcoms, getpubById } from "../../../JS/actions/pub";
+import { addReservation, getcoms, getpubById,deletePubById } from "../../../JS/actions/pub";
 import CardComments from "../../Commentaire/CardComments";
 import LikeButton from "../../Like";
 import "./SingelPub.css";
@@ -104,9 +104,14 @@ const SingelPub = ({ match, user }) => {
         <br />
         <br /> 
         {same &&
-          (  <Link to="/EditPub">
+           (<Link to="/EditPub">
             <Button className="Bedit" variant="primary" >Edit Pub</Button>
-          </Link>  ) } 
+          </Link>)  }
+          <br/>
+          {same && 
+          (<Link to="/mypubs">
+            <Button className="Bedit" variant="primary" onClick={()=>dispatch(deletePubById(pub._id))}>Suprimer Pub</Button>
+          </Link>) } 
         {showComments && (
           <div className="comment-form">
             <CardComments pub={pub && pub} />

@@ -12,10 +12,10 @@ const PubList = () => {
     <ul className="cardss">
       {loadpub ? (
         <Spinner className="spinner" animation="border" variant="primary" />
-      ) : (pubs&&pubs) === null || (pubs.length&&pubs.length === 0) ? (
+      ) : (pubs&&pubs) === null  ? (
         <h2>Pas de publications!!</h2>
       ) : (
-        pubs.map((el) => <Pub key={el._id} pub={el} />)
+        pubs&&pubs.map((el) => <Pub key={el._id} pub={el} />)
       )}
     </ul>
   );
