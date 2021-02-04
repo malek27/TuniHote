@@ -141,7 +141,7 @@ export const addComment = (pubid, text) => async (dispatch) => {
     // dispatch({ type: ADD_COMMENT, payload: res.data });
     dispatch(getcoms());
 
-    alert("Comment Added", "success");
+    // alert("Comment Added", "success");
   } catch (err) {
     dispatch({
       type: FAIL_PUB,
@@ -169,7 +169,7 @@ export const likePost = (pubid) => async (dispatch) => {
     const res = await axios.put(`/pub/like/${pubid}`, "", options);
     console.log("res", res);
     dispatch({ type: UPDATE_LIKES, payload: res.data });
-    alert("Like Added", "success");
+    // alert("Like Added", "success");
   } catch (err) {
     console.log(err);
     dispatch({
@@ -185,7 +185,7 @@ export const unlikePost = (pubid) => async (dispatch) => {
     const res = await axios.put(`/pub/unlike/${pubid}`, "", options);
     console.log("res unlike", res);
     dispatch({ type: UPDATE_DISLIKES, payload: res.data });
-    alert("Like removed", "success");
+    // alert("Like removed", "success");
   } catch (err) {
     dispatch({
       type: FAIL_PUB,
@@ -204,7 +204,7 @@ export const addReservation = (pubid, dateDebut,dateFin) => async (dispatch) => 
     // dispatch(getReservation());
     dispatch(getpubById(pubid));
 
-    alert("Reservation Added", "success");
+    // alert("Reservation Added", "success");
   } catch (err) {
     dispatch({
       type: FAIL_PUB,
@@ -264,7 +264,7 @@ export const accepterR = (idR) => async (dispatch) => {
     const res = await axios.put(`/pub/accepter/${idR}`, "", options);
     console.log("res accepter", res);
     dispatch({ type: ACCPTER_R, payload: res.data });
-    alert("reservation accepter", "success");
+    // alert("reservation accepter", "success");
     dispatch(getReservation())
   } catch (err) {
     dispatch({
@@ -280,7 +280,7 @@ export const declinerR = (idR) => async (dispatch) => {
     const res = await axios.put(`/pub/decliner/${idR}`, "", options);
     console.log("res accepter", res);
     dispatch({ type: DECLINER_R, payload: res.data });
-    alert("reservation decliner", "success");
+    // alert("reservation decliner", "success");
     dispatch(getReservation())
   } catch (err) {
     dispatch({
