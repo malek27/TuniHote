@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.footer{
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: rgba(214, 213, 210, 0.493);
+  /* position: initial; */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+ justify-content: space-between;
+}
+ .savoir{
+  padding: 3% 0% 0% 0%;
+}
+.malek{
+  padding: 3% 3% 3% 20%;
+}
+.contactez{
+  padding: 1% 0% 0% 0%;
+}
+html{
+  height: 100%;
+}

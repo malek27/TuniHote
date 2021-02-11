@@ -27,7 +27,7 @@ const ReservationM = () => {
 
   return (
     <div>
-      <h2>Reservation</h2>
+      <h1>Reservation</h1>
       {loadresrvs ? (
         <Spinner animation="border" variant="primary" />
       ) : (localStorage.getItem("token") && localStorage.getItem('role')==="maison d'hôte") ? (
@@ -35,7 +35,9 @@ const ReservationM = () => {
           (reservation.pub.postedBy === user._id && reservation.reponse === "en attente") &&
          ( <div className="reservations" key={reservation._id}>
             <h5>
-              l'utilisateur : {reservation.user["nom"]} {reservation.user["prenom"]} veut reserver : {reservation.pub.titre} , du  {reservation.dateDebut} au {reservation.dateFin}
+              l'utilisateur : {reservation.user&&reservation.user["nom"]} {reservation.user&&reservation.user["prenom"]} 
+              <br/>
+              veut reserver : {reservation.pub.titre} , du  {reservation.dateDebut} au {reservation.dateFin}
             </h5>
             <div>
               <button onClick={() => dispatch(accepterR(reservation._id))}>accepter</button>
@@ -45,6 +47,8 @@ const ReservationM = () => {
               >
                 decliner
               </button>
+              <br/>
+              <br/>
             </div>
           </div>)  ))) : 
       (localStorage.getItem("token") && localStorage.getItem('role')==='utilisateur') ? (

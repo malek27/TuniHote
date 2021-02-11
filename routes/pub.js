@@ -49,7 +49,7 @@ router.get('/search/:region', controllers.searchPub);
 
 router.post("/comment/:idpost" ,isAuth(),controllers.addCom);
 router.get("/comments/:idpost",isAuth(), controllers.getcoms );
-
+router.delete("/comments/:id",isAuth(), controllers.deleteCom );
 
 
 //*************************Like************************

@@ -93,8 +93,8 @@ div .login-box {margin-left: 18%;}
 }
 
 .login-space .group .label {
-  color: rgb(247, 141, 3);
-  font-size: 15px;
+  color: beige;
+    font-size: 17px;
 }
 
 .login-space .group .button {
@@ -103,7 +103,7 @@ div .login-box {margin-left: 18%;}
 }
 
 .login-space .group select {
-  background: blueviolet;
+  background: black;
   color: white;
   border-radius: 8%;
   margin-left: 5%;
@@ -223,4 +223,7 @@ div h4 {
 
 .row{
   margin-left: 57px !important;
+}
+.role{
+  color: aliceblue;
 }

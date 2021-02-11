@@ -40,8 +40,11 @@ const Nave = ({ history }) => {
         <Nav className="mr-auto">
           <Nav.Link href="/Home">Acceuil</Nav.Link>
           <Nav.Link href="/AboutUs">contactez-nous</Nav.Link>
-          <NavDropdown title="Option" id="basic-nav-dropdown">
-            <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
+          
+                  {/* <MDBIcon icon="user" /> */}
+          <NavDropdown title="Profil" icon="user" id="basic-nav-dropdown">
+            {/* <img src="https://upload.wikimedia.org/wikipedia/commons/f/f4/User_Avatar_2.png"/> */}
+            <NavDropdown.Item href="/Profile">Profil</NavDropdown.Item>
             <NavDropdown.Item href="/addPub">
               Ajout publication
             </NavDropdown.Item>
@@ -63,7 +66,7 @@ const Nave = ({ history }) => {
               history.push("/SignUp");
             }}
           >
-            Deconnection
+            Deconnexion
           </Nav.Link>
         </Nav>
         <Form inline onSubmit={handleSubmit}>
@@ -91,8 +94,8 @@ const Nave = ({ history }) => {
         <Nav className="mr-auto">
           <Nav.Link href="/Home">Acceuil</Nav.Link>
           <Nav.Link href="/AboutUs">contactez-nous</Nav.Link>
-          <NavDropdown title="Option" id="basic-nav-dropdown">
-            <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
+          <NavDropdown title="Profil" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/Profile">Profil</NavDropdown.Item>
             <NavDropdown.Item href="/addPub">
               Ajout publication
             </NavDropdown.Item>
@@ -101,6 +104,9 @@ const Nave = ({ history }) => {
             <NavDropdown.Item href="/reservationM">
               Reservations
             </NavDropdown.Item>
+            <NavDropdown.Item href="/reservationA">
+              Reservations accepter
+            </NavDropdown.Item>
           </NavDropdown>
           <Nav.Link
             onClick={() => {
@@ -108,7 +114,7 @@ const Nave = ({ history }) => {
               history.push("/SignUp");
             }}
           >
-            Deconnection
+            Deconnexion
           </Nav.Link>
         </Nav>
         <Form inline onSubmit={handleSubmit}>
@@ -136,8 +142,8 @@ const Nave = ({ history }) => {
         <Nav className="mr-auto">
           <Nav.Link href="/Home">Acceuil</Nav.Link>
           <Nav.Link href="/AboutUs">contactez-nous</Nav.Link>
-          <NavDropdown title="Option" id="basic-nav-dropdown">
-            <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
+          <NavDropdown title="Profil" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/Profile">Profil</NavDropdown.Item>
             <NavDropdown.Item href="/reservationM">
               Reservations
             </NavDropdown.Item>
@@ -148,7 +154,7 @@ const Nave = ({ history }) => {
               history.push("/SignUp");
             }}
           >
-            Deconnection
+            Deconnexion
           </Nav.Link>
         </Nav>
         <Form inline onSubmit={handleSubmit}>

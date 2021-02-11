@@ -168,7 +168,7 @@ exports.addCom = async (req, res) => {
 exports.getcoms = async (req, res) => {
   try {
     // const pub = await Pub.findOne({ _id: req.params.idpost })
-    let result = await Comment.find({pub:req.params.idpost}).sort({ date: -1 }).populate("user");
+    let result = await Comment.find({pub:req.params.idpost}).populate("user").sort({ date: -1 });
     res
       .status(200)
       .send({ response: result, message: "Getting comments successfully" });
@@ -177,7 +177,19 @@ exports.getcoms = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
-
+//delete com by id
+exports.deleteCom = async (req, res) => {
+  try {
+    let result = await Comment.deleteOne({ _id: req.params.id });
+    result
+      ? res
+          .status(200)
+          .send({ response: result, message: "votre com a etait supprimer" })
+      : res.status(500).send({ message: "il y a pas de com avec cette id" });
+  } catch (error) {
+    res.status(500).send({ message: "il y a pas de id" });
+  }
+};
 
 //like
 exports.like = async (req, res) => {

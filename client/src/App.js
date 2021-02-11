@@ -14,15 +14,18 @@ import EditPub from "./components/Edit/EditPub";
 import EditUser from "./components/Edit/EditUser";
 import ReservationM from "./components/Reservations/ReservationM";
 import Home from "./components/pages/Home";
-import ListeUser from "./components/ListeUser";
-import ListePub from "./components/ListePub";
+import ListeU from "./components/ListeU/ListeU";
+// import ListeUser from "./components/ListeUser";
+// import ListePub from "./components/ListePub";
+import ListeP from "./components/ListeP/ListeP";
 import Utilisateur from "./components/utilisateur/Utilisateur";
 import { current } from "./JS/actions/user";
 import Intro from "./components/pages/Intro/Intro"
 import Mypubs from "./components/My pub/Mypubs";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import ReservationA from "./components/Reservations/ReservationA";
+import Footer from "./components/Footer"
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 
 function App() {
@@ -57,8 +60,12 @@ function App() {
           />
           <Admin
             path="/ListeUser"
-            render={() => <ListeUser users={users} loadUser={loadUser} />}
+            render={() => <ListeU users={users} loadUser={loadUser} />}
           />
+          {/* <Admin
+            path="/ListeUser"
+            render={() => <ListeUser users={users} loadUser={loadUser} />}
+          /> */}
           <PrivateRoute
             path="/Profile"
             render={() => <Utilisateur user={user} loadUser={loadUser} />}
@@ -66,8 +73,10 @@ function App() {
           <Route path="/AboutUs" component={AboutUs} />
           <Route path="/SignUp" component={SignUp} />
           <RoleRoute path="/AddPub" component={AddPub} />
-          <Admin path="/ListePub" component={ListePub} />
+          <Admin path="/ListePub" component={ListeP} />
+          {/* <Admin path="/ListePub" component={ListePub} /> */}
           <RoleRoute path="/reservationM" component={ReservationM} />
+          <RoleRoute path="/reservationA" component={ReservationA} />
           <RoleRoute path="/mypubs" component={Mypubs} />
           <PrivateRoute path="/SingelPub/:id" 
           render={(props)=> <SingelPub pub={pub&&pub} user={user&&user}  {...props} />} /> 
@@ -80,7 +89,7 @@ function App() {
       <br/>
       <br/>
       <br/>
-      <footer className="blockquote-footer">
+      {/* <footer className="blockquote-footer">
         Developper par : <cite title="Source Title">Malek Marzouki ©®™</cite>
         <br/>
         contactez-nous par : 
@@ -88,7 +97,8 @@ function App() {
          - email : TuniHoteM@gmail.com
         <br/>
                    - telephone : +21623091754
-      </footer>
+      </footer> */}
+      <Footer/>
     </div>
   );
 }

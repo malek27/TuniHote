@@ -7,21 +7,23 @@ import { Link } from "react-router-dom";
 import "./EditUser.css";
 
 const EditUser = () => {
+  const user = useSelector((state) => state.userReducer.user);
+  const id = user && user._id;
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getuser(user._id))
+  }, [dispatch,user._id])
+  const history = useHistory();
+  
+ 
   const [nom, setNom] = useState("");
   const [prenom, setPrenom] = useState("");
   const [email, setEmail] = useState("");
   const [adresse, setAdresse] = useState("");
   const [cin, setCin] = useState("");
   const [numero, setNumero] = useState("");
-
-  const user = useSelector((state) => state.userReducer.user);
-  const id = user && user._id;
-  useEffect(() => {
-    dispatch(getuser(user._id))
-  }, [dispatch,user._id])
- 
-  const history = useHistory();
+  
+  
   return (
     <div className="edit">
           <div className="edit-box"></div>
@@ -38,7 +40,7 @@ const EditUser = () => {
                   id="userr"
                   type="text"
                   className="input"
-                  placeholder="entrer votre Nom"
+                  defaultValue={user.nom}
                   onChange={(e) => setNom(e.target.value)}
                 />
               </div>
@@ -50,7 +52,7 @@ const EditUser = () => {
                   id="user"
                   type="text"
                   className="input"
-                  placeholder="entrer votre Prenom"
+                  defaultValue={user.prenom}
                   onChange={(e) => setPrenom(e.target.value)}
                 />
               </div>
@@ -62,7 +64,7 @@ const EditUser = () => {
                   id="useer"
                   type="text"
                   className="input"
-                  placeholder="entrer votre Email"
+                  defaultValue={user.email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
@@ -74,7 +76,7 @@ const EditUser = () => {
                   id="uuser"
                   type="text"
                   className="input"
-                  placeholder="entrer votre Adresse"
+                  defaultValue={user.adresse}
                   onChange={(e) => setAdresse(e.target.value)}
                 />
               </div>
@@ -86,7 +88,7 @@ const EditUser = () => {
                   id="paass"
                   type="text"
                   className="input"
-                  placeholder="entrer votre Cin"
+                  defaultValue={user.cin}
                   onChange={(e) => setCin(e.target.value)}
                 />
               </div>
@@ -98,7 +100,7 @@ const EditUser = () => {
                   id="ppass"
                   type="text"
                   className="input"
-                  placeholder="entrer votre Numero"
+                  defaultValue={user.numero}
                   onChange={(e) => setNumero(e.target.value)}
                 />
                 <br/>

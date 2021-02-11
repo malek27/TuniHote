@@ -19,7 +19,7 @@ const SingelPub = ({ match, user }) => {
 
 
   const postedBy = useSelector((state) => state.pubReducer.pub.postedBy);
-  // const comments = useSelector((state) => state.pubReducer.pub.comments);
+  const comments = useSelector((state) => state.pubReducer.pub.comments);
 
   let same = postedBy === user._id
   
@@ -68,7 +68,7 @@ const SingelPub = ({ match, user }) => {
                   src="../img/icons/message1.svg"
                   alt="comment"
                 />
-                {/* <span>{comments.length && comments.length}</span> */}
+                <span>{comments && comments.length}</span>
               </div>
             </div>
             </div>

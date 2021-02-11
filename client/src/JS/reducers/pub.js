@@ -18,7 +18,8 @@ import {
   GET_MY_PUB,
   ADD_RESERVATION,
   DECLINER_R,
-  ACCPTER_R
+  ACCPTER_R,
+  DELETE_COM
 } from "../const/pub";
 
 const initiState = {
@@ -86,6 +87,8 @@ export const pubReducer = (state = initiState, { type, payload }) => {
       };
     case GET_ALL_COMS:
       return { ...state, loadcoms: false, comments: payload };
+      case DELETE_COM:
+      return { ...state, loadcoms: false };
     case ADD_RESERVATION:
       return {
         ...state,

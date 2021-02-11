@@ -35,7 +35,7 @@ const EditPub = () => {
                       id="user"
                       type="text"
                       className="input"
-                      placeholder="entrer votre Titre"
+                      defaultValue={pub.titre}
                       onChange={(e) => setTitre(e.target.value)}
                     />
                   </div>
@@ -47,7 +47,7 @@ const EditPub = () => {
                       className="form-control"
                       id="bio"
                       rows={3}
-                      placeholder="entrer votre Description"
+                      defaultValue={pub.description}
                       onChange={(e) => setDescription(e.target.value)}
                     />
                   </div>
@@ -59,7 +59,7 @@ const EditPub = () => {
                       id="uuser"
                       type="text"
                       className="input"
-                      placeholder="entrer votre Prix"
+                      defaultValue={pub.prix}
                       onChange={(e) => setPrix(e.target.value)}
                     />
                   </div>

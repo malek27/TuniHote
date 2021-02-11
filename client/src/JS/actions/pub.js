@@ -14,7 +14,8 @@ import {
   LOAD_RESERVATION,
   GET_MY_PUB,
   ACCPTER_R,
-  DECLINER_R
+  DECLINER_R,
+  DELETE_COM
 } from "../const/pub";
 import axios from "axios";
 
@@ -140,7 +141,7 @@ export const addComment = (pubid, text) => async (dispatch) => {
     const res = await axios.post(`/pub/comment/${pubid}`, { text }, options);
     console.log("res com", res);
     // dispatch({ type: ADD_COMMENT, payload: res.data });
-    dispatch(getcoms());
+    dispatch(getcoms(pubid));
 
     // alert("Comment Added", "success");
   } catch (err) {
@@ -158,6 +159,22 @@ export const getcoms = (id) => async (dispatch) => {
   try {
     let result = await axios.get(`/pub/comments/${id}`, options);
     dispatch({ type: GET_ALL_COMS, payload: result.data.response });
+  } catch (e) {
+    dispatch({ type: FAIL_PUB, payload: e.message });
+  }
+};
+
+// delete com by id
+
+export const deleteComById = (id) => async (dispatch) => {
+  const options = {
+    headers: {
+      authorization: localStorage.getItem("token"),
+    },
+  };
+  try {
+    let result = await axios.delete(`/pub/comments/${id}`, options);
+    dispatch({ type: DELETE_COM, payload: result });
   } catch (e) {
     dispatch({ type: FAIL_PUB, payload: e.message });
   }

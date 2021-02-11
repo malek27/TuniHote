@@ -18,7 +18,7 @@ const Mypubs = () => {
 
 
   return  ( <div>
-    <h2>Mes publications</h2>
+    <h1>Mes publications</h1>
     <ul className="cards">
       {loadpub ? (
         <Spinner className="spinner" animation="border" variant="primary" />

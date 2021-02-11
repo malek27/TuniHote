@@ -1,10 +1,16 @@
 import React from "react";
 import { Spinner } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { deleteComById } from "../../JS/actions/pub";
+import {Link} from "react-router-dom"
 import "./Com.css";
 const Com = () => {
+  const dispatch = useDispatch()
   const comments = useSelector((state) => state.pubReducer.comments);
   const loadcoms = useSelector((state) => state.pubReducer.loadcoms);
+  const pub = useSelector((state) => state.pubReducer.pub);
+  const user = useSelector((state) => state.userReducer.user);
+  const pubId=pub._id
   return (
     <div>
       {loadcoms ? (
@@ -14,8 +20,10 @@ const Com = () => {
       ) : (
         comments.map((comment) => (
         
-            <div className="com">
-              <div className="col-md-8" key={comment._id}>
+            <div className="com" key={comment._id}>
+              
+              <div className="col-md-8" >
+             
                 <div className="media g-mb-30 media-comment">
                 <img
                     className="d-flex g-width-10 g-height-50 rounded-circle g-mt-3 g-mr-15"
@@ -35,9 +43,21 @@ const Com = () => {
                       </span>
                     </div>
                     <p>{comment.date}</p>
+                    {/* {user && user._id === comment.user && comment.user["_id"] && */}
+                    <Link to={`/SingelPub/${pubId}`}><input
+        type="submit"
+        className="user-delete-btn"
+        name="btnAddMore"
+        value="Supprimer"
+        onClick={() => dispatch(deleteComById(comment._id))}
+      />
+      </Link>
                   </div>
+                 
                 </div>
+               
               </div>
+              
             </div>
         ))
       )}

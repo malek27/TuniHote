@@ -15,6 +15,7 @@ const CardComments = ({ pub}) => {
     e.preventDefault();
     if (text) {
       dispatch(addComment(pub._id, text));
+      setText("")
     }
   };
 

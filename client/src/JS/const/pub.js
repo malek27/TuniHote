@@ -12,6 +12,7 @@ export const GET_MY_PUB = "GET_MY_PUB";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const GET_ALL_COMS = "GET_ALL_COMS";
 export const LOAD_COMS = "ُLOAD_COMS";
+export const DELETE_COM ="DELETE_COM"
 export const RATE = "RATE";
 
 // like/dislike
