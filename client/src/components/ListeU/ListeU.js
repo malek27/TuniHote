@@ -6,7 +6,7 @@ import {getusers} from "../../JS/actions/user"
 import { Link } from "react-router-dom";
 import {deleteUserById} from "../../JS/actions/user"
 import "./ListeU.css"
-import { use } from 'passport';
+
 
   
 

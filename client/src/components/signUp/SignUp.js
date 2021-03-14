@@ -183,8 +183,8 @@ const SignUp = () => {
                       id="Role"
                       onChange={(e) => setRole(e.target.value)}
                     >
-                      <option value="Utilisateur">utilisateur</option>
-                      <option value="Maison d'hôte">maison d'hôte</option>
+                      <option value="utilisateur">utilisateur</option>
+                      <option value="maison d'hôte">maison d'hôte</option>
                     </select>
                   </div>
                   <div className="group">

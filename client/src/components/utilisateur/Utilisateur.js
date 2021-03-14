@@ -1,7 +1,7 @@
 import React from "react";
 import "./Utilisateur.css";
 import { useSelector,useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import {deleteUserById} from "../../JS/actions/user"
 
 
@@ -11,6 +11,7 @@ const Utilisateur = () => {
   const loadUser = useSelector((state) => state.userReducer.loadUser);
   const id = user._id;
   const dispatch = useDispatch();
+ 
  
   return user ? (
     <div>
@@ -51,7 +52,7 @@ const Utilisateur = () => {
                 className="profile-edit-btn"
                 name="btnAddMore"
                 value="Edit Profile"
-
+                // onClick={() => dispatch(getuser(id),history)}
               /></Link>
               <Link to="/Home"><input
                 type="submit"

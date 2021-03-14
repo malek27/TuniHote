@@ -8,7 +8,7 @@ const ReservationA = () => {
 
     let reservations = useSelector((state) => state.pubReducer.reservations);
     let loadresrvs = useSelector((state) => state.pubReducer.loadresrvs);
-    let pub = useSelector((state) => state.pubReducer.pub);
+    // let pub = useSelector((state) => state.pubReducer.pub);
     let user = useSelector((state) => state.userReducer.user);
    
     const dispatch = useDispatch();

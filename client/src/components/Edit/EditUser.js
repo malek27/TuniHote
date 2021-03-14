@@ -16,12 +16,12 @@ const EditUser = () => {
   const history = useHistory();
   
  
-  const [nom, setNom] = useState("");
-  const [prenom, setPrenom] = useState("");
-  const [email, setEmail] = useState("");
-  const [adresse, setAdresse] = useState("");
-  const [cin, setCin] = useState("");
-  const [numero, setNumero] = useState("");
+  const [nom, setNom] = useState(user.nom);
+  const [prenom, setPrenom] = useState(user.prenom);
+  const [email, setEmail] = useState(user.email);
+  const [adresse, setAdresse] = useState(user.adresse);
+  const [cin, setCin] = useState(user.cin);
+  const [numero, setNumero] = useState(user.numero);
   
   
   return (
@@ -40,7 +40,7 @@ const EditUser = () => {
                   id="userr"
                   type="text"
                   className="input"
-                  defaultValue={user.nom}
+                  value={nom}
                   onChange={(e) => setNom(e.target.value)}
                 />
               </div>
@@ -52,7 +52,7 @@ const EditUser = () => {
                   id="user"
                   type="text"
                   className="input"
-                  defaultValue={user.prenom}
+                  value={prenom}
                   onChange={(e) => setPrenom(e.target.value)}
                 />
               </div>
@@ -64,7 +64,7 @@ const EditUser = () => {
                   id="useer"
                   type="text"
                   className="input"
-                  defaultValue={user.email}
+                  value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
@@ -76,7 +76,7 @@ const EditUser = () => {
                   id="uuser"
                   type="text"
                   className="input"
-                  defaultValue={user.adresse}
+                  value={adresse}
                   onChange={(e) => setAdresse(e.target.value)}
                 />
               </div>
@@ -88,7 +88,7 @@ const EditUser = () => {
                   id="paass"
                   type="text"
                   className="input"
-                  defaultValue={user.cin}
+                  value={cin}
                   onChange={(e) => setCin(e.target.value)}
                 />
               </div>
@@ -100,7 +100,7 @@ const EditUser = () => {
                   id="ppass"
                   type="text"
                   className="input"
-                  defaultValue={user.numero}
+                  value={numero}
                   onChange={(e) => setNumero(e.target.value)}
                 />
                 <br/>

@@ -8,12 +8,14 @@ import {getpubById} from "../../JS/actions/pub"
 import "./EditPub.css";
 
 const EditPub = () => {
-  const [titre, setTitre] = useState("");
-  const [description, setDescription] = useState("");
-  const [prix, setPrix] = useState("");
- 
   const pub = useSelector((state) => state.pubReducer.pub);
   const id = pub && pub._id;
+
+  const [titre, setTitre] = useState(pub.titre);
+  const [description, setDescription] = useState(pub.description);
+  const [prix, setPrix] = useState(pub.prix);
+ 
+ 
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
@@ -35,7 +37,7 @@ const EditPub = () => {
                       id="user"
                       type="text"
                       className="input"
-                      defaultValue={pub.titre}
+                      value={titre}
                       onChange={(e) => setTitre(e.target.value)}
                     />
                   </div>
@@ -47,7 +49,7 @@ const EditPub = () => {
                       className="form-control"
                       id="bio"
                       rows={3}
-                      defaultValue={pub.description}
+                      value={description}
                       onChange={(e) => setDescription(e.target.value)}
                     />
                   </div>
@@ -59,7 +61,7 @@ const EditPub = () => {
                       id="uuser"
                       type="text"
                       className="input"
-                      defaultValue={pub.prix}
+                      value={prix}
                       onChange={(e) => setPrix(e.target.value)}
                     />
                   </div>

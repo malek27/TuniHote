@@ -9,7 +9,7 @@ const Com = () => {
   const comments = useSelector((state) => state.pubReducer.comments);
   const loadcoms = useSelector((state) => state.pubReducer.loadcoms);
   const pub = useSelector((state) => state.pubReducer.pub);
-  const user = useSelector((state) => state.userReducer.user);
+  // const user = useSelector((state) => state.userReducer.user);
   const pubId=pub._id
   return (
     <div>
